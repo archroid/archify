@@ -17,7 +17,7 @@ func shutdown() error {
 		return err
 	}
 
-	log.Error("System shutdown triggered")
+	log.Warn("System shutdown triggered")
 	os.Exit(0)
 	return nil
 }
@@ -31,7 +31,7 @@ func reboot() error {
 		return err
 	}
 
-	log.Info("System reboot triggered")
+	log.Warn("System reboot triggered")
 	os.Exit(0)
 	return nil
 
@@ -44,6 +44,6 @@ func sleep() error {
 		log.Error("Error sleeping:", err)
 		return err
 	}
-	log.Error("System suspend triggered")
+	log.Warn("System suspend triggered")
 	return nil
 }

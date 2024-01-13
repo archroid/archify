@@ -32,6 +32,8 @@ func main() {
 
 	http.Handle("/", fs)
 
+	http.HandleFunc("/ping", handlePing)
+
 	http.HandleFunc("/shutdown", handleShutdown)
 	http.HandleFunc("/off", handleShutdown)
 
@@ -79,6 +81,11 @@ func main() {
 }
 
 // HTTP hanlders
+
+func handlePing(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("Pong"))
+
+}
 
 func handleSleep(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("Suspention triggered"))
