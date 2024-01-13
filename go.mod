@@ -5,6 +5,7 @@ go 1.21.5
 require (
 	github.com/bwmarrin/discordgo v0.27.1
 	github.com/charmbracelet/log v0.3.1
+	github.com/common-nighthawk/go-figure v0.0.0-20210622060536-734e95fb86be
 	github.com/go-telegram-bot-api/telegram-bot-api/v5 v5.5.1
 	github.com/joho/godotenv v1.5.1
 )

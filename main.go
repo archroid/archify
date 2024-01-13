@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 	"os"
 	"os/exec"
@@ -8,10 +9,18 @@ import (
 	"syscall"
 
 	log "github.com/charmbracelet/log"
+	"github.com/common-nighthawk/go-figure"
 	"github.com/joho/godotenv"
 )
 
 func main() {
+
+	//ASCII art
+	myFigure := figure.NewColorFigure("Home Serve", "", "blue", false)
+	myFigure.Print()
+
+	fmt.Println("\n")
+
 	// Load the .env file
 	err := godotenv.Load()
 	if err != nil {
@@ -56,7 +65,7 @@ func main() {
 
 	}()
 
-	log.Debug("Press CTRL-C to exit")
+	log.Info("Press CTRL-C to exit")
 
 	sc := make(chan os.Signal, 1)
 	signal.Notify(sc, syscall.SIGINT, syscall.SIGTERM, os.Interrupt)
