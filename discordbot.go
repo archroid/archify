@@ -2,7 +2,6 @@ package main
 
 import (
 	"os"
-	"os/exec"
 	"os/signal"
 	"syscall"
 
@@ -61,32 +60,34 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 	}
 
 	if m.Content == "shutdown" || m.Content == "off" {
-		s.ChannelMessageSend(m.ChannelID, "SHUTTING DOWN")
-		// Execute the shutdown command
-		cmd := exec.Command("shutdown", "-h", "now")
-		err := cmd.Run()
+		s.ChannelMessageSend(m.ChannelID, "shutting down triggered")
+
+		err := shutdown()
 		if err != nil {
-			log.Error("Error shutting down:", err)
-			// http.Error(w, "Internal server error", http.StatusInternalServerError)
+			s.ChannelMessageSend(m.ChannelID, "Error shutting down: "+err.Error())
 			return
 		}
-		// If the command executed successfully, terminate the server
-		log.Error("System shutdown triggered")
-		os.Exit(0)
 
 	}
 
 	if m.Content == "sleep" || m.Content == "suspend" {
-		s.ChannelMessageSend(m.ChannelID, "SLEEPING")
-		// Execute the sleep command
-		cmd := exec.Command("systemctl", "suspend")
-		err := cmd.Run()
+		s.ChannelMessageSend(m.ChannelID, "suspention triggered")
+
+		err := sleep()
 		if err != nil {
-			log.Error("Error sleeping:", err)
-			// http.Error(w, "Internal server error", http.StatusInternalServerError)
+			s.ChannelMessageSend(m.ChannelID, "Error suspending: "+err.Error())
 			return
 		}
-		log.Error("System suspend triggered")
+	}
+
+	if m.Content == "reboot" {
+		s.ChannelMessageSend(m.ChannelID, "rebooting triggered")
+
+		err := reboot()
+		if err != nil {
+			s.ChannelMessageSend(m.ChannelID, "Error rebooting: "+err.Error())
+			return
+		}
 	}
 
 }

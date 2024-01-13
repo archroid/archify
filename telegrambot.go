@@ -12,8 +12,7 @@ import (
 func telegramBot() error {
 
 	//setup proxy
-
-	proxyURL, err := url.Parse("http://127.0.0.1:2081") // replace with your proxy address
+	proxyURL, err := url.Parse("http://127.0.0.1:2081") 
 	if err != nil {
 		return err
 	}
@@ -28,7 +27,6 @@ func telegramBot() error {
 
 	bot, err := tgbotapi.NewBotAPIWithClient(os.Getenv("TELEGRAM_BOT_TOKEN"), tgbotapi.APIEndpoint, client)
 	if err != nil {
-		// log.Printf("Failed to create bot: %v", err)
 		return err
 	}
 	// bot.Debug = true
@@ -48,6 +46,58 @@ func telegramBot() error {
 
 			bot.Send(msg)
 		}
+
+		if update.Message.Text == "/shutdown" || update.Message.Text == "/off" {
+
+			msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Shutting down triggered")
+			msg.ReplyToMessageID = update.Message.MessageID
+
+			bot.Send(msg)
+
+			err := shutdown()
+			if err != nil {
+				msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Shut down Error"+err.Error())
+				msg.ReplyToMessageID = update.Message.MessageID
+
+				bot.Send(msg)
+			}
+
+		}
+
+		if update.Message.Text == "/reboot" {
+
+			msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Rebooting triggered")
+			msg.ReplyToMessageID = update.Message.MessageID
+
+			bot.Send(msg)
+
+			err := reboot()
+			if err != nil {
+				msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Reboot Error"+err.Error())
+				msg.ReplyToMessageID = update.Message.MessageID
+
+				bot.Send(msg)
+			}
+			
+		}
+
+		if update.Message.Text == "/sleep" || update.Message.Text == "/suspend" {
+
+			msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Suspention triggered")
+			msg.ReplyToMessageID = update.Message.MessageID
+
+			bot.Send(msg)
+
+			err := sleep()
+			if err != nil {
+				msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Sleep Error"+err.Error())
+				msg.ReplyToMessageID = update.Message.MessageID
+
+				bot.Send(msg)
+			}
+			
+		}
+
 	}
 	return nil
 }

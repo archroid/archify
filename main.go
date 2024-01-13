@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"net/http"
 	"os"
-	"os/exec"
 	"os/signal"
 	"syscall"
 
@@ -15,7 +14,7 @@ import (
 
 func main() {
 
-	//ASCII art
+	//ASCII art on startup
 	myFigure := figure.NewColorFigure("Home Serve", "", "blue", false)
 	myFigure.Print()
 
@@ -26,6 +25,8 @@ func main() {
 	if err != nil {
 		log.Error("Error loading .env file")
 	}
+
+	// HTTP routes and serves
 
 	fs := http.FileServer(http.Dir("/home/ali"))
 
@@ -39,6 +40,8 @@ func main() {
 
 	http.HandleFunc("/sleep", handleSleep)
 	http.HandleFunc("/suspend", handleSleep)
+
+	// run bots and server in goroutines
 
 	go func() {
 		log.Info("Server started on http://localhost:8080")
@@ -65,6 +68,8 @@ func main() {
 
 	}()
 
+	// Wait here until CTRL-C or other term signal is received.
+
 	log.Info("Press CTRL-C to exit")
 
 	sc := make(chan os.Signal, 1)
@@ -73,42 +78,31 @@ func main() {
 
 }
 
+// HTTP hanlders
+
 func handleSleep(w http.ResponseWriter, r *http.Request) {
-	// Execute the sleep command
-	cmd := exec.Command("systemctl", "suspend")
-	err := cmd.Run()
+	w.Write([]byte("Suspention triggered"))
+
+	err := sleep()
 	if err != nil {
-		log.Error("Error sleeping: ", err)
-		http.Error(w, "Internal server error", http.StatusInternalServerError)
-		return
+		http.Error(w, "Error suspending "+err.Error(), http.StatusInternalServerError)
 	}
-	log.Info("System suspend triggered")
 }
 
 func handleShutdown(w http.ResponseWriter, r *http.Request) {
-	// Execute the shutdown command
-	cmd := exec.Command("shutdown", "-h", "now")
-	err := cmd.Run()
+	w.Write([]byte("Shutting down triggered"))
+
+	err := shutdown()
 	if err != nil {
-		log.Error("Error shutting down: ", err)
-		http.Error(w, "Internal server error", http.StatusInternalServerError)
-		return
+		http.Error(w, "Error shutting down "+err.Error(), http.StatusInternalServerError)
 	}
-	// If the command executed successfully, terminate the server
-	log.Info("System shutdown triggered")
-	os.Exit(0)
 }
 
 func handleReboot(w http.ResponseWriter, r *http.Request) {
-	// Execute the reboot command
-	cmd := exec.Command("reboot")
-	err := cmd.Run()
+	w.Write([]byte("Rebooting triggered"))
+
+	err := reboot()
 	if err != nil {
-		log.Error("Error rebooting: ", err)
-		http.Error(w, "Internal server error", http.StatusInternalServerError)
-		return
+		http.Error(w, "Error rebooting "+err.Error(), http.StatusInternalServerError)
 	}
-	// If the command executed successfully, terminate the server
-	log.Info("System reboot triggered")
-	os.Exit(0)
 }
