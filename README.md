@@ -21,6 +21,8 @@ git clone https://github.com/archroid/homeServe.git
 
 ```sh
 export  DISCORD_BOT_TOKEN={DISCORD_BOT_TOKEN}
+
+export  TELEGRAM_BOT_TOKEN={TELEGRAM_BOT_TOKEN}
 ```
 
 * See [this](https://www.writebots.com/discord-bot-token/) and [this](https://core.telegram.org/bots/tutorial#obtain-your-bot-token) to make a bot and get your tokens.
