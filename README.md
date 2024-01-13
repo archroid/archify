@@ -23,12 +23,8 @@ git clone https://github.com/archroid/homeServe.git
 export  DISCORD_BOT_TOKEN={DISCORD_BOT_TOKEN}
 ```
 
-* See [this](https://www.writebots.com/discord-bot-token/) and [this](https://core.telegram.org/bots/tutorial#obtain-your-bot-token) to make a bot and get your token.
+* See [this](https://www.writebots.com/discord-bot-token/) and [this](https://core.telegram.org/bots/tutorial#obtain-your-bot-token) to make a bot and get your tokens.
 
-* If you don't have the youtube API key, click. [here](https://blog.hubspot.com/website/how-to-get-youtube-api-key) 
- 
-
-* See [this](https://docs.mongodb.com/manual/installation/) link to install mongoDb if you don't have it installed.
 
 4. Install dependencies
 ```sh
