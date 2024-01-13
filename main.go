@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"net"
 	"net/http"
 	"os"
 	"os/signal"
@@ -12,6 +13,7 @@ import (
 	"github.com/joho/godotenv"
 )
 
+var localip string
 
 func main() {
 
@@ -25,6 +27,15 @@ func main() {
 	err := godotenv.Load()
 	if err != nil {
 		log.Error("Error loading .env file")
+	}
+
+	//find device local ip
+	host, _ := os.Hostname()
+	addrs, _ := net.LookupIP(host)
+	for _, addr := range addrs {
+		if ipv4 := addr.To4(); ipv4 != nil {
+			localip = ipv4.String()
+		}
 	}
 
 	// HTTP routes and serves
@@ -47,7 +58,7 @@ func main() {
 	// run bots and server in goroutines
 
 	go func() {
-		log.Info("Server started on http://localhost:8080")
+		log.Info("Server started on http://"+ localip +":8080")
 		log.Error(http.ListenAndServe(":8080", nil))
 
 	}()
