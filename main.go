@@ -12,6 +12,7 @@ import (
 	"github.com/joho/godotenv"
 )
 
+
 func main() {
 
 	//ASCII art on startup
