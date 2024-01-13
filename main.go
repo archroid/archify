@@ -19,7 +19,7 @@ func main() {
 	myFigure := figure.NewColorFigure("Home Serve", "", "blue", false)
 	myFigure.Print()
 
-	fmt.Println("\n")
+	fmt.Println("")
 
 	// Load the .env file
 	err := godotenv.Load()
