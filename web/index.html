@@ -2,6 +2,7 @@
 <html>
      <head>
           <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
           <title>archroid's HomeServer</title>       
           <link href="style.css" rel="stylesheet">
           <link rel="icon" href="https://avatars.githubusercontent.com/u/50708771?s=400&u=283e9b4589fc6d1455f2cea0356cc7f4156a5251&v=4">
@@ -39,25 +40,26 @@
 
           <script>
                function ping() {
-                    window.location.href = "http://192.168.1.100:8080/ping";
+                    window.location.href = window.location.href + "/ping";
 
                }
                     
                function accessServer() {
-                    window.location.href = "http://192.168.1.100:8080/f/";
-               }
+                    window.location.href = window.location.href + "/f/";
+
+                              }
 
                function reboot() {
-                    window.location.href = "http://192.168.1.100:8080/reboot";
+                    window.location.href = window.location.href + "/reboot";
 
                }
 
                function shutdown() {
-                    window.location.href = "http://192.168.1.100:8080/shutdown";
+                    window.location.href = window.location.href + "/shutdown";
                }
 
                function sleep() {
-                    window.location.href = "http://192.168.1.100:8080/sleep";
+                    window.location.href = window.location.href + "/sleep";
                }
           </script>
      </body>
