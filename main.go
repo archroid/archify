@@ -6,10 +6,12 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
+	"strings"
 	"syscall"
 
 	log "github.com/charmbracelet/log"
 	"github.com/common-nighthawk/go-figure"
+	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
 )
 
@@ -40,26 +42,80 @@ func main() {
 
 	// HTTP routes and serves
 
+	// serve files in home directory
+	r2 := mux.NewRouter()
 	fs := http.FileServer(http.Dir("/home/ali"))
+	r2.PathPrefix("/").Handler(http.StripPrefix("/", fs))
 
-	http.Handle("/", fs)
+	// main http server
+	r := mux.NewRouter()
 
-	http.HandleFunc("/ping", handlePing)
+	r.HandleFunc("/ping", handlePing)
 
-	http.HandleFunc("/shutdown", handleShutdown)
-	http.HandleFunc("/off", handleShutdown)
+	r.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 
-	http.HandleFunc("/reboot", handleReboot)
-	http.HandleFunc("/restart", handleReboot)
+		files, err := os.ReadDir("/home/ali")
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+		// Write the CSS styles
+		fmt.Fprintln(w, "<style>")
+		fmt.Fprintln(w, "@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');")
+		fmt.Fprintln(w, "body { font-family: 'Roboto', sans-serif; font-size: 16px; }")
+		fmt.Fprintln(w, "a { color: black; text-decoration: none; }")
+		fmt.Fprintln(w, "a:active { background-color: lightgray; }")
+		fmt.Fprintln(w, "table { border-collapse: collapse; width: auto; border: 0; }")
+		fmt.Fprintln(w, "td { border: 0; padding: 5px; font-size: 20px; }")
+		fmt.Fprintln(w, "</style>")
 
-	http.HandleFunc("/sleep", handleSleep)
-	http.HandleFunc("/suspend", handleSleep)
+		// Start the table
+		fmt.Fprintln(w, "<table>")
+
+		for _, file := range files {
+			if !strings.HasPrefix(file.Name(), ".") {
+			    fileURL := "http://" + localip + ":8090/" + file.Name()
+			    // Check if the file is a directory
+			    if file.IsDir() {
+				   // If it is, prepend a document emoji to the file name
+				   fmt.Fprintf(w, "<tr><td>📁 <a href=\"%s\">%s</a></td></tr>", fileURL, file.Name())
+			    } else {
+				   // Check if the file is a video
+				   if strings.HasSuffix(file.Name(), ".mp4") || strings.HasSuffix(file.Name(), ".avi") || strings.HasSuffix(file.Name(), ".mov") || strings.HasSuffix(file.Name(), ".mkv") || strings.HasSuffix(file.Name(), ".flv") || strings.HasSuffix(file.Name(), ".wmv") || strings.HasSuffix(file.Name(), ".webm") {
+					  // If it is, prepend a video camera emoji to the file name
+					  fmt.Fprintf(w, "<tr><td>🎥 <a href=\"%s\">%s</a></td></tr>", fileURL, file.Name())
+				   } else if strings.HasSuffix(file.Name(), ".jpg") || strings.HasSuffix(file.Name(), ".jpeg") || strings.HasSuffix(file.Name(), ".png") || strings.HasSuffix(file.Name(), ".gif") || strings.HasSuffix(file.Name(), ".bmp") {
+					  // If it is an image, prepend an image emoji to the file name
+					  fmt.Fprintf(w, "<tr><td>📸 <a href=\"%s\">%s</a></td></tr>", fileURL, file.Name())
+				   } else {
+					  fmt.Fprintf(w, "<tr><td>📄 <a href=\"%s\">%s</a></td></tr>", fileURL, file.Name())
+				   }
+			    }
+			}
+		 }
+
+		// End the table
+		fmt.Fprintln(w, "</table>")
+
+	})
+
+	r.HandleFunc("/shutdown", handleShutdown)
+	r.HandleFunc("/off", handleShutdown)
+
+	r.HandleFunc("/reboot", handleReboot)
+	r.HandleFunc("/restart", handleReboot)
+
+	r.HandleFunc("/sleep", handleSleep)
+	r.HandleFunc("/suspend", handleSleep)
 
 	// run bots and server in goroutines
+	go func() {
+		log.Error(http.ListenAndServe(":8090", r2))
+	}()
 
 	go func() {
-		log.Info("Server started on http://"+ localip +":8080")
-		log.Error(http.ListenAndServe(":8080", nil))
+		log.Info("Server started on http://" + localip + ":8080")
+		log.Error(http.ListenAndServe(":8080", r))
 
 	}()
 
