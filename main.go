@@ -50,6 +50,8 @@ func main() {
 	// main http server
 	r := mux.NewRouter()
 
+	r.HandleFunc("/", handleSite)
+
 	r.HandleFunc("/ping", handlePing)
 
 	r.HandleFunc("/f/{dir:.*}", handleFolder)
@@ -138,7 +140,6 @@ func handleReboot(w http.ResponseWriter, r *http.Request) {
 }
 
 func handleFolder(w http.ResponseWriter, r *http.Request) {
-	// fmt.Fprintln(w, "F")
 	vars := mux.Vars(r)
 	directory := vars["dir"]
 
@@ -146,6 +147,8 @@ func handleFolder(w http.ResponseWriter, r *http.Request) {
 
 	getDirectory(w, directory)
 }
+
+
 
 func getDirectory(w http.ResponseWriter, directory string) {
 	files, err := os.ReadDir(directory)
