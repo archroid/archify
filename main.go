@@ -54,7 +54,6 @@ func main() {
 	r := mux.NewRouter()
 
 	r.HandleFunc("/", handleSite)
-	
 
 	r.HandleFunc("/ping", handlePing)
 
@@ -156,27 +155,56 @@ func handleSite(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w, r, "./web/index.html")
 }
 
-
 func getDirectory(w http.ResponseWriter, directory string) {
 	files, err := os.ReadDir(directory)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
+
 	// Write the CSS styles
-	fmt.Fprintln(w, "<style>")
-	fmt.Fprintln(w, "@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');")
-	fmt.Fprintln(w, "body { font-family: 'Roboto', sans-serif; font-size: 16px; }")
-	fmt.Fprintln(w, "a { color: black; text-decoration: none; }")
-	fmt.Fprintln(w, "a:active { background-color: lightgray; }")
-	fmt.Fprintln(w, "table { border-collapse: collapse; width: auto; border: 0; }")
-	fmt.Fprintln(w, "td { border: 0; padding: 5px; font-size: 20px; }")
-	fmt.Fprintln(w, "h4 { color: blue; }") // Add this line
-	fmt.Fprintln(w, "</style>")
 
-	fmt.Fprintln(w, "<head> <link rel='icon' href='https://avatars.githubusercontent.com/u/50708771?s=400&u=283e9b4589fc6d1455f2cea0356cc7f4156a5251&v=4'> <title>Home Serv</title></head>")
+	fmt.Fprintln(w, `
+	
+	<head>
+		<link rel='icon' href='https://avatars.githubusercontent.com/u/50708771?s=400&u=283e9b4589fc6d1455f2cea0356cc7f4156a5251&v=4'> <title>Home Serv</title>
+		<style>
+			table {
+			width: 100%;
+			}
 
-	fmt.Fprintln(w, "<h1>Home Serve</h1>")
+			td {
+			word-wrap: break-word;
+			}
+
+			@media only screen and (max-width: 600px) {
+			td {
+			font-size: small;
+			}
+			}
+		</style>
+
+	</head>
+		
+		`)
+
+	fmt.Fprintln(w, `
+
+
+		<style>
+			@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+			body { font-family: 'Roboto', sans-serif; font-size: 16px; }
+			a { color: black; text-decoration: none; }
+			a:active { background-color: lightgray; }
+			table { border-collapse: collapse; width: auto; border: 0; }
+			td { border: 0; padding: 5px; font-size: 20px; }
+			h4 { color: blue; 
+		</style>
+		<h1>Home Serve</h1>
+
+
+		`)
+
 	fmt.Fprintln(w, "<h4>"+directory+"</h4>")
 
 	// Start the table
