@@ -16,6 +16,7 @@ import (
 )
 
 var localip string
+var homePath string
 
 func main() {
 
@@ -31,6 +32,8 @@ func main() {
 		log.Error("Error loading .env file")
 	}
 
+	homePath = os.Getenv("HOME_PATH")
+
 	//find device local ip
 	host, _ := os.Hostname()
 	addrs, _ := net.LookupIP(host)
@@ -44,7 +47,7 @@ func main() {
 
 	// serve files in home directory
 	r2 := mux.NewRouter()
-	fs := http.FileServer(http.Dir("/home/ali"))
+	fs := http.FileServer(http.Dir(homePath))
 	r2.PathPrefix("/").Handler(http.StripPrefix("/", fs))
 
 	// main http server
@@ -143,12 +146,10 @@ func handleFolder(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	directory := vars["dir"]
 
-	directory = "/home/ali/" + directory
+	directory = homePath + "/" + directory
 
 	getDirectory(w, directory)
 }
-
-
 
 func getDirectory(w http.ResponseWriter, directory string) {
 	files, err := os.ReadDir(directory)
@@ -173,10 +174,17 @@ func getDirectory(w http.ResponseWriter, directory string) {
 	// Start the table
 	fmt.Fprintln(w, "<table>")
 
+	directory = strings.TrimPrefix(directory, homePath)
+
+	if directory == "/" {
+		directory = strings.TrimSuffix(directory, "/")
+
+	}
+
 	for _, file := range files {
 		if !strings.HasPrefix(file.Name(), ".") {
-			fileURL := "http://" + localip + ":8090" + strings.TrimPrefix(directory, "/home/ali/") + "/" + file.Name()
-			fileURLFolder := "http://" + localip + ":8080/f" + strings.TrimPrefix(directory, "/home/ali/") + "/" + file.Name()
+			fileURL := "http://" + localip + ":8090/" + directory + file.Name() + "/"
+			fileURLFolder := "http://" + localip + ":8080/f/" + directory + file.Name() + "/"
 			// Check if the file is a directory
 			if file.IsDir() {
 				// If it is, prepend a document emoji to the file name
