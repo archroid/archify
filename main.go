@@ -75,7 +75,7 @@ func main() {
 	}()
 
 	go func() {
-		log.Info("Server started on http://" + localip + ":8080")
+		log.Info("Server started: http://" + localip + ":8080")
 		log.Error(http.ListenAndServe(":8080", r))
 
 	}()
@@ -215,6 +215,6 @@ func handleDirectory(w http.ResponseWriter, r *http.Request) {
 	// get connected user's ip and port, split it by ip and log warn to server.
 	ip := strings.Split(r.RemoteAddr, ":")[0]
 
-	log.Warnf("%s opened directory", ip)
+	log.Warnf("Dir Access: %s", ip)
 
 }
