@@ -26,31 +26,40 @@
      body { font-family: 'Roboto', sans-serif; font-size: 16px; }
      a { color: black; text-decoration: none; }
      a:active { background-color: lightgray; }
-     table { border-collapse: collapse; width: auto; border: 0; }
-     td { border: 0; padding: 5px; font-size: 20px; }
+     table { border-collapse: collapse; width: auto; border: 0;  }
+     td { border: 0; padding-top: 5px; padding-bottom: 5px; padding-left: 3px; font-size: 17px; }
      h4 { color: blue; }
+     .inline-link {display: inline-block;}
+     .items {padding-right: 30px;}
+
 </style>
 
  		<h1>Home Serve</h1>
         <h4>{{.CurrentDir}}</h2>
 
-
-
-<table>
-     {{range .Files}}
-     
-     <tr>
-         <td>
-             {{if .IsDir}}
-                 <a href="{{.FileURLFolder}}">📁{{.Name}}</a>
-             {{else if or (hasSuffix .Name ".mp4") (hasSuffix .Name ".avi") (hasSuffix .Name ".mov") (hasSuffix .Name ".mkv") (hasSuffix .Name ".flv") (hasSuffix .Name ".wmv") (hasSuffix .Name ".webm")}}
-                 <a href="{{.FileURL}}">🎥{{.Name}}</a>
-             {{else if or (hasSuffix .Name ".jpg") (hasSuffix .Name ".jpeg") (hasSuffix .Name ".png") (hasSuffix .Name ".gif") (hasSuffix .Name ".bmp")}}
-                 <a href="{{.FileURL}}">📸{{.Name}}</a>
-             {{else}}
-                 <a href="{{.FileURL}}">📄{{.Name}}</a>
-             {{end}}
-         </td>
-     </tr>
-     {{end}}
-</table>
+            <body>
+                <table>
+                    {{range .Files}}
+                    <tr>
+                        <td>
+                            {{if .IsDir}}
+                                📁
+                            {{else if or (hasSuffix .Name ".mp4") (hasSuffix .Name ".avi") (hasSuffix .Name ".mov") (hasSuffix .Name ".mkv") (hasSuffix .Name ".flv") (hasSuffix .Name ".wmv") (hasSuffix .Name ".webm")}}
+                                🎥
+                            {{else if or (hasSuffix .Name ".jpg") (hasSuffix .Name ".jpeg") (hasSuffix .Name ".png") (hasSuffix .Name ".gif") (hasSuffix .Name ".bmp")}}
+                                📸
+                            {{else}}
+                                📄
+                            {{end}}
+                        </td>
+                        <td class="items">
+                            {{if .IsDir}}
+                                <a class="inline-link" href="{{.FileURLFolder}}">{{.Name}}</a>
+                            {{else}}
+                                <a class="inline-link" href="{{.FileURL}}">{{.Name}}</a>
+                            {{end}}
+                        </td>
+                    </tr>
+                    {{end}}
+               </table>
+            </body>

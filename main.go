@@ -58,7 +58,7 @@ func main() {
 
 	r.HandleFunc("/ping", handlePing)
 
-	r.HandleFunc("/f/{dir:.*}", handleFolder)
+	r.HandleFunc("/d/{dir:.*}", handleDirectory)
 
 	r.HandleFunc("/shutdown", handleShutdown)
 	r.HandleFunc("/off", handleShutdown)
@@ -116,6 +116,10 @@ func handlePing(w http.ResponseWriter, r *http.Request) {
 
 }
 
+func handleSite(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w, r, "./templates/index.html")
+}
+
 func handleSleep(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("Suspention triggered"))
 
@@ -143,26 +147,7 @@ func handleReboot(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func handleFolder(w http.ResponseWriter, r *http.Request) {
-
-	vars := mux.Vars(r)
-	directory := vars["dir"]
-
-	directory = homePath + "/" + directory
-
-	getDirectory(w, directory)
-
-	// get connected user's ip and port, split it by ip and log warn to server.
-	ip := strings.Split(r.RemoteAddr, ":")[0]
-
-	log.Warnf("%s opened directory", ip)
-
-}
-
-func handleSite(w http.ResponseWriter, r *http.Request) {
-	http.ServeFile(w, r, "./templates/index.html")
-}
-
+// structs requiered for the template
 type File struct {
 	IsDir         bool
 	Name          string
@@ -176,7 +161,12 @@ type Directory struct {
 	Files      []File
 }
 
-func getDirectory(w http.ResponseWriter, directory string) {
+func handleDirectory(w http.ResponseWriter, r *http.Request) {
+
+	vars := mux.Vars(r)
+	directory := vars["dir"]
+
+	directory = homePath + "/" + directory
 
 	files, err := os.ReadDir(directory)
 	if err != nil {
@@ -200,7 +190,7 @@ func getDirectory(w http.ResponseWriter, directory string) {
 				IsDir:         file.IsDir(),
 				Name:          file.Name(),
 				FileURL:       "http://" + localip + ":8090/" + directory + file.Name() + "/",
-				FileURLFolder: "http://" + localip + ":8080/f/" + directory + file.Name() + "/",
+				FileURLFolder: "http://" + localip + ":8080/d/" + directory + file.Name() + "/",
 			})
 		}
 	}
@@ -222,4 +212,9 @@ func getDirectory(w http.ResponseWriter, directory string) {
 	if err != nil {
 		log.Fatal(err)
 	}
+	// get connected user's ip and port, split it by ip and log warn to server.
+	ip := strings.Split(r.RemoteAddr, ":")[0]
+
+	log.Warnf("%s opened directory", ip)
+
 }
