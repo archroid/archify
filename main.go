@@ -143,6 +143,9 @@ func handleReboot(w http.ResponseWriter, r *http.Request) {
 }
 
 func handleFolder(w http.ResponseWriter, r *http.Request) {
+
+	log.Warn(r.RemoteAddr + " accessed directory")
+
 	vars := mux.Vars(r)
 	directory := vars["dir"]
 
@@ -156,41 +159,39 @@ func handleSite(w http.ResponseWriter, r *http.Request) {
 }
 
 func getDirectory(w http.ResponseWriter, directory string) {
+
+	
+
 	files, err := os.ReadDir(directory)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 
-	// Write the CSS styles
-
-	fmt.Fprintln(w, `
-	
-	<head>
-		<link rel='icon' href='https://avatars.githubusercontent.com/u/50708771?s=400&u=283e9b4589fc6d1455f2cea0356cc7f4156a5251&v=4'> <title>Home Serv</title>
-		<style>
-			table {
-			width: 100%;
-			}
-
-			td {
-			word-wrap: break-word;
-			}
-
-			@media only screen and (max-width: 600px) {
-			td {
-			font-size: small;
-			}
-			}
-		</style>
-          <meta name="viewport" content="width=device-width, initial-scale=1">
-
-	</head>
-		
-		`)
+	// Header, CSS and other html settings
 
 	fmt.Fprintln(w, `
 
+		<head>
+			<link rel='icon' href='https://avatars.githubusercontent.com/u/50708771?s=400&u=283e9b4589fc6d1455f2cea0356cc7f4156a5251&v=4'> <title>Home Serv</title>
+			<style>
+				table {
+				width: 100%;
+				}
+
+				td {
+				word-wrap: break-word;
+				}
+
+				@media only screen and (max-width: 600px) {
+				td {
+				font-size: small;
+				}
+				}
+			</style>
+			<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		</head>
 
 		<style>
 			@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
@@ -230,12 +231,12 @@ func getDirectory(w http.ResponseWriter, directory string) {
 				// Check if the file is a video
 				if strings.HasSuffix(file.Name(), ".mp4") || strings.HasSuffix(file.Name(), ".avi") || strings.HasSuffix(file.Name(), ".mov") || strings.HasSuffix(file.Name(), ".mkv") || strings.HasSuffix(file.Name(), ".flv") || strings.HasSuffix(file.Name(), ".wmv") || strings.HasSuffix(file.Name(), ".webm") {
 					// If it is, prepend a video camera emoji to the file name
-					fmt.Fprintf(w, "<tr><td>🎥 <a href=\"%s\">%s</a></td></tr>", fileURL, file.Name())
+					fmt.Fprintf(w, "<tr><td> <a href=\"%s\">%s</a></td></tr>", fileURL, "🎥"+file.Name())
 				} else if strings.HasSuffix(file.Name(), ".jpg") || strings.HasSuffix(file.Name(), ".jpeg") || strings.HasSuffix(file.Name(), ".png") || strings.HasSuffix(file.Name(), ".gif") || strings.HasSuffix(file.Name(), ".bmp") {
 					// If it is an image, prepend an image emoji to the file name
-					fmt.Fprintf(w, "<tr><td>📸 <a href=\"%s\">%s</a></td></tr>", fileURL, file.Name())
+					fmt.Fprintf(w, "<tr><td> <a href=\"%s\">%s</a></td></tr>", fileURL, "📸"+file.Name())
 				} else {
-					fmt.Fprintf(w, "<tr><td>📄 <a href=\"%s\">%s</a></td></tr>", fileURL, file.Name())
+					fmt.Fprintf(w, "<tr><td> <a href=\"%s\">%s</a></td></tr>", fileURL, "📄"+file.Name())
 				}
 			}
 		}
