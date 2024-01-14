@@ -175,7 +175,7 @@ func getDirectory(w http.ResponseWriter, directory string) {
 	fmt.Fprintln(w, `
 
 		<head>
-			<link rel='icon' href='https://avatars.githubusercontent.com/u/50708771?s=400&u=283e9b4589fc6d1455f2cea0356cc7f4156a5251&v=4'> <title>Home Serv</title>
+			<link rel='icon' href='https://avatars.githubusercontent.com/u/50708771'> <title>Home Serv</title>
 			<style>
 				table {
 				width: 100%;
