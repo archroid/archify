@@ -161,17 +161,19 @@ func getDirectory(w http.ResponseWriter, directory string) {
 	fmt.Fprintln(w, "a:active { background-color: lightgray; }")
 	fmt.Fprintln(w, "table { border-collapse: collapse; width: auto; border: 0; }")
 	fmt.Fprintln(w, "td { border: 0; padding: 5px; font-size: 20px; }")
+	fmt.Fprintln(w, "h4 { color: blue; }") // Add this line
 	fmt.Fprintln(w, "</style>")
 
 	fmt.Fprintln(w, "<h1>Home Serve</h1>")
+	fmt.Fprintln(w, "<h4>"+directory+"</h4>")
 
 	// Start the table
 	fmt.Fprintln(w, "<table>")
 
 	for _, file := range files {
 		if !strings.HasPrefix(file.Name(), ".") {
-			fileURL := "http://" + localip + ":8090/" + strings.TrimPrefix(directory, "/home/ali") + "/" + file.Name()
-			fileURLFolder := "http://" + localip + ":8080/f/" + strings.TrimPrefix(directory, "/home/ali") + "/" + file.Name()
+			fileURL := "http://" + localip + ":8090" + strings.TrimPrefix(directory, "/home/ali/") + "/" + file.Name()
+			fileURLFolder := "http://" + localip + ":8080/f" + strings.TrimPrefix(directory, "/home/ali/") + "/" + file.Name()
 			// Check if the file is a directory
 			if file.IsDir() {
 				// If it is, prepend a document emoji to the file name
