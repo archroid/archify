@@ -183,6 +183,7 @@ func getDirectory(w http.ResponseWriter, directory string) {
 			}
 			}
 		</style>
+          <meta name="viewport" content="width=device-width, initial-scale=1">
 
 	</head>
 		
