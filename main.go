@@ -145,7 +145,12 @@ func handleReboot(w http.ResponseWriter, r *http.Request) {
 func handleFolder(w http.ResponseWriter, r *http.Request) {
 
 	// get connected user's ip and port, split it by ip and log warn to server.
-	log.Warn(strings.Split(r.RemoteAddr, ":")[0] + " opened directory")
+	ipaddress := strings.Split(r.RemoteAddr, ":")[0]
+	hostname, err := net.LookupAddr(ipaddress)
+	if err != nil {
+		hostname[0] = "Unknown"
+	}
+	log.Warnf("ip:%s host:%s opened directory", ipaddress, hostname[0])
 
 	vars := mux.Vars(r)
 	directory := vars["dir"]
@@ -160,8 +165,6 @@ func handleSite(w http.ResponseWriter, r *http.Request) {
 }
 
 func getDirectory(w http.ResponseWriter, directory string) {
-
-	
 
 	files, err := os.ReadDir(directory)
 	if err != nil {
