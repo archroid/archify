@@ -144,7 +144,8 @@ func handleReboot(w http.ResponseWriter, r *http.Request) {
 
 func handleFolder(w http.ResponseWriter, r *http.Request) {
 
-	log.Warn(r.RemoteAddr + " accessed directory")
+	// get connected user's ip and port, split it by ip and log warn to server.
+	log.Warn(strings.Split(r.RemoteAddr, ":")[0] + " opened directory")
 
 	vars := mux.Vars(r)
 	directory := vars["dir"]
