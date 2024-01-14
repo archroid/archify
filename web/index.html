@@ -2,12 +2,63 @@
 <html>
      <head>
           <meta charset="UTF-8">
-          <title>Home</title>       
-          <link href="css/style.css" rel="stylesheet">
+          <title>archroid's HomeServer</title>       
+          <link href="style.css" rel="stylesheet">
+          <link rel="icon" href="https://avatars.githubusercontent.com/u/50708771?s=400&u=283e9b4589fc6d1455f2cea0356cc7f4156a5251&v=4">
+          <style>
+               body {
+                   display: flex;
+                   justify-content: center;
+                   align-items: center;
+                   height: 100vh;
+                   background-color: #f0f0f0;
+               }
+               .dashboard {
+                   display: flex;
+                   flex-direction: column;
+                   align-items: center;
+                   gap: 20px;
+               }
+               .dashboard button {
+                   padding: 10px 20px;
+                   font-size: 20px;
+                   cursor: pointer;
+                   border-radius: 50px;
+               }
+           </style>
      </head>
 
      <body>
-          
+          <div class="dashboard">
+               <button onclick="accessServer()">Directory</button>
+               <button onclick="ping()">ping</button>
+               <button onclick="reboot()">Reboot</button>
+               <button onclick="shutdown()">Shutdown</button>
+               <button onclick="sleep()">Sleep</button>
+          </div>
+
+          <script>
+               function ping() {
+                    window.location.href = "http://192.168.1.100:8080/ping";
+
+               }
+                    
+               function accessServer() {
+                    window.location.href = "http://192.168.1.100:8080/f/";
+               }
+
+               function reboot() {
+                    window.location.href = "http://192.168.1.100:8080/reboot";
+
+               }
+
+               function shutdown() {
+                    window.location.href = "http://192.168.1.100:8080/shutdown";
+               }
+
+               function sleep() {
+                    window.location.href = "http://192.168.1.100:8080/sleep";
+               }
+          </script>
      </body>
-    
 </html>

@@ -54,6 +54,7 @@ func main() {
 	r := mux.NewRouter()
 
 	r.HandleFunc("/", handleSite)
+	
 
 	r.HandleFunc("/ping", handlePing)
 
@@ -151,6 +152,11 @@ func handleFolder(w http.ResponseWriter, r *http.Request) {
 	getDirectory(w, directory)
 }
 
+func handleSite(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w, r, "./web/index.html")
+}
+
+
 func getDirectory(w http.ResponseWriter, directory string) {
 	files, err := os.ReadDir(directory)
 	if err != nil {
@@ -167,6 +173,8 @@ func getDirectory(w http.ResponseWriter, directory string) {
 	fmt.Fprintln(w, "td { border: 0; padding: 5px; font-size: 20px; }")
 	fmt.Fprintln(w, "h4 { color: blue; }") // Add this line
 	fmt.Fprintln(w, "</style>")
+
+	fmt.Fprintln(w, "<head> <link rel='icon' href='https://avatars.githubusercontent.com/u/50708771?s=400&u=283e9b4589fc6d1455f2cea0356cc7f4156a5251&v=4'> <title>Home Serv</title></head>")
 
 	fmt.Fprintln(w, "<h1>Home Serve</h1>")
 	fmt.Fprintln(w, "<h4>"+directory+"</h4>")
