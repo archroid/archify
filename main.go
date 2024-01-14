@@ -8,6 +8,7 @@ import (
 	"os/signal"
 	"strings"
 	"syscall"
+	"text/template"
 
 	log "github.com/charmbracelet/log"
 	"github.com/common-nighthawk/go-figure"
@@ -159,7 +160,20 @@ func handleFolder(w http.ResponseWriter, r *http.Request) {
 }
 
 func handleSite(w http.ResponseWriter, r *http.Request) {
-	http.ServeFile(w, r, "./web/index.html")
+	http.ServeFile(w, r, "./templates/index.html")
+}
+
+type File struct {
+	IsDir         bool
+	Name          string
+	FileURL       string
+	FileURLFolder string
+	CurrentDir    string
+}
+
+type Directory struct {
+	CurrentDir string
+	Files      []File
 }
 
 func getDirectory(w http.ResponseWriter, directory string) {
@@ -170,49 +184,8 @@ func getDirectory(w http.ResponseWriter, directory string) {
 		return
 	}
 
-	// Header, CSS and other html settings
-
-	fmt.Fprintln(w, `
-
-		<head>
-			<link rel='icon' href='https://avatars.githubusercontent.com/u/50708771'> <title>Home Serv</title>
-			<style>
-				table {
-				width: 100%;
-				}
-
-				td {
-				word-wrap: break-word;
-				}
-
-				@media only screen and (max-width: 600px) {
-				td {
-				font-size: small;
-				}
-				}
-			</style>
-			<meta name="viewport" content="width=device-width, initial-scale=1">
-
-		</head>
-
-		<style>
-			@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-			body { font-family: 'Roboto', sans-serif; font-size: 16px; }
-			a { color: black; text-decoration: none; }
-			a:active { background-color: lightgray; }
-			table { border-collapse: collapse; width: auto; border: 0; }
-			td { border: 0; padding: 5px; font-size: 20px; }
-			h4 { color: blue; 
-		</style>
-		<h1>Home Serve</h1>
-
-
-		`)
-
-	fmt.Fprintln(w, "<h4>"+directory+"</h4>")
-
-	// Start the table
-	fmt.Fprintln(w, "<table>")
+	// Prepare data for the template
+	var filesData []File
 
 	directory = strings.TrimPrefix(directory, homePath)
 
@@ -223,27 +196,30 @@ func getDirectory(w http.ResponseWriter, directory string) {
 
 	for _, file := range files {
 		if !strings.HasPrefix(file.Name(), ".") {
-			fileURL := "http://" + localip + ":8090/" + directory + file.Name() + "/"
-			fileURLFolder := "http://" + localip + ":8080/f/" + directory + file.Name() + "/"
-			// Check if the file is a directory
-			if file.IsDir() {
-				// If it is, prepend a document emoji to the file name
-				fmt.Fprintf(w, "<tr><td>📁 <a href=\"%s\">%s</a></td></tr>", fileURLFolder, file.Name())
-			} else {
-				// Check if the file is a video
-				if strings.HasSuffix(file.Name(), ".mp4") || strings.HasSuffix(file.Name(), ".avi") || strings.HasSuffix(file.Name(), ".mov") || strings.HasSuffix(file.Name(), ".mkv") || strings.HasSuffix(file.Name(), ".flv") || strings.HasSuffix(file.Name(), ".wmv") || strings.HasSuffix(file.Name(), ".webm") {
-					// If it is, prepend a video camera emoji to the file name
-					fmt.Fprintf(w, "<tr><td> <a href=\"%s\">%s</a></td></tr>", fileURL, "🎥"+file.Name())
-				} else if strings.HasSuffix(file.Name(), ".jpg") || strings.HasSuffix(file.Name(), ".jpeg") || strings.HasSuffix(file.Name(), ".png") || strings.HasSuffix(file.Name(), ".gif") || strings.HasSuffix(file.Name(), ".bmp") {
-					// If it is an image, prepend an image emoji to the file name
-					fmt.Fprintf(w, "<tr><td> <a href=\"%s\">%s</a></td></tr>", fileURL, "📸"+file.Name())
-				} else {
-					fmt.Fprintf(w, "<tr><td> <a href=\"%s\">%s</a></td></tr>", fileURL, "📄"+file.Name())
-				}
-			}
+			filesData = append(filesData, File{
+				IsDir:         file.IsDir(),
+				Name:          file.Name(),
+				FileURL:       "http://" + localip + ":8090/" + directory + file.Name() + "/",
+				FileURLFolder: "http://" + localip + ":8080/f/" + directory + file.Name() + "/",
+			})
 		}
 	}
 
-	// End the table
-	fmt.Fprintln(w, "</table>")
+	dir := Directory{
+		CurrentDir: directory,
+		Files:      filesData,
+	}
+
+	// Parse and execute the template
+	t, err := template.New("directory.html").Funcs(template.FuncMap{
+		"hasSuffix": strings.HasSuffix,
+	}).ParseFiles("directory.html")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	err = t.Execute(w, dir)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
