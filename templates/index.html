@@ -3,12 +3,12 @@
 <html>
 
 <head>
+     <link rel='icon' href='https://avatars.githubusercontent.com/u/50708771'>
      <meta charset="UTF-8">
      <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <style>
      @import url('https://fonts.googleapis.com/css2?family=Open+Sans');
-
      @media (max-width: 600px) {
           .container {
                flex-direction: column;
@@ -58,9 +58,56 @@
           transform: scale(0.95);
           background-color: #e0e0e0;
      }
+
+     .top-bar {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: auto;
+          color: white;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background-color: #ffffff;
+     }
+
+     .top-bar-image {
+          height: 40px;
+          width: 40px;
+          border-radius: 50%;
+
+     }
+
+     .top-bar-text {
+          font-size: 25px;
+          font-family: 'Open Sans';
+          user-select: none;
+          font-weight: bold;
+          margin-left: 15px;
+
+     }
+
+     .footer {
+          left: 0;
+          bottom: 0;
+          width: 100%;
+          background-color: #f8f9fa;
+          color: black;
+          text-align: center;
+          padding: 10px 0;
+     }
+     .footer-text{
+          font-size: 10px;
+     }
 </style>
 
 <body>
+     <div class="top-bar">
+          <img src="https://avatars.githubusercontent.com/u/50708771" alt="Your Image" class="top-bar-image">
+          <p class="top-bar-text"> Home Server </p>
+     </div>
+
      <div class="container">
           <div class="box" onclick="accessServer()">
                <p>Directory</p>
@@ -74,10 +121,23 @@
           <div class="box" onclick="sleep()">
                <p>Sleep</p>
           </div>
+          <div class="box" onclick="ping()">
+               <p>Ping</p>
+          </div>
      </div>
      <script>
           function ping() {
-               window.location.href = window.location.href + "/ping";
+               const startTime = Date.now();
+               fetch(window.location.href + "/ping")
+                    .then(response => response.json())
+                    .then(data => {
+                         const endTime = Date.now();
+                         const duration = endTime - startTime;
+                         alert(`${JSON.stringify(data.resp)}, Time: ${duration} ms`);
+                    })
+                    .catch((error) => {
+                         console.error('Error:', error);
+                    });
 
           }
 
@@ -87,19 +147,36 @@
           }
 
           function reboot() {
-               window.location.href = window.location.href + "/reboot";
+               fetch(window.location.href + "/reboot")
+                    .then(response => response.json())
+                    .then(data => console.log(data))
+                    .catch((error) => {
+                         console.error('Error:', error);
+                    });
 
           }
 
           function shutdown() {
-               window.location.href = window.location.href + "/shutdown";
+               fetch(window.location.href + "/shutdown")
+                    .then(response => response.json())
+                    .then(data => console.log(data))
+                    .catch((error) => {
+                         console.error('Error:', error);
+                    });
           }
 
           function sleep() {
-               window.location.href = window.location.href + "/sleep";
+               fetch(window.location.href + "/sleep")
+                    .then(response => response.json())
+                    .then(data => console.log(data))
+                    .catch((error) => {
+                         console.error('Error:', error);
+                    });
           }
      </script>
-
+     <div class="footer">
+          <p class="footer-text">© 2024 archroid. All rights reserved.</p>
+     </div>
 </body>
 
 </html>

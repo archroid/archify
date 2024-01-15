@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"net"
 	"net/http"
@@ -112,8 +113,7 @@ func main() {
 // HTTP hanlders
 
 func handlePing(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("Pong"))
-
+	json.NewEncoder(w).Encode(map[string]string{"resp": "pong"})
 }
 
 func handleSite(w http.ResponseWriter, r *http.Request) {
