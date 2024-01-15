@@ -1,3 +1,7 @@
+<!DOCTYPE html>
+
+<html>
+
 <head>
     <link rel='icon' href='https://avatars.githubusercontent.com/u/50708771'>
     <title>Home Serv</title>
@@ -6,15 +10,28 @@
 </head>
 
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Open+Sans');
 
     body {
-        font-family: 'Roboto', sans-serif;
         font-size: 16px;
+        font-family: 'Open Sans';
+        padding-right: 20px;
     }
 
-    h4 {
-        color: rgb(124, 55, 174);
+
+    .current-dir {
+        padding: 10px;
+        font-size: 17px;
+        font-family: 'Open Sans';
+        font-weight: 500;
+        color: #26205e;
+        
+    }
+
+    .directory-div {
+        background-color: #e4dbff;
+        border-radius: 10px;
+        max-width: fit-content;
     }
 
     .items:active {
@@ -23,7 +40,7 @@
 
     table {
         border-collapse: collapse;
-        width: auto;
+        width: 100%;
         border: 0;
         border-collapse: separate;
         border-spacing: 0 5px;
@@ -38,6 +55,7 @@
     td {
         border: 0;
         font-size: 17px;
+        font-family: 'Open Sans';
         word-wrap: break-word;
 
     }
@@ -57,6 +75,7 @@
     .logo-column {
         padding-right: 10px;
         padding-left: 10px;
+        width: 10px;
     }
 
     .file-name {
@@ -71,36 +90,76 @@
         overflow: hidden;
         text-overflow: ellipsis;
     }
+
+    .top-bar {
+        width: 100%;
+        height: auto;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #ffffff;
+    }
+
+    .top-bar-image {
+        height: 40px;
+        width: 40px;
+        border-radius: 50%;
+
+    }
+
+    .top-bar-text {
+        font-size: 25px;
+        font-family: 'Open Sans';
+        user-select: none;
+        font-weight: bold;
+        margin-left: 15px;
+        color: #26205e;
+        font-family: 'Open Sans';
+        user-select: none;
+        font-weight: bold;
+    }
 </style>
 
-<h1>Home Serve</h1>
-<h4>{{.CurrentDir}}</h2>
 
-    <body>
-        <table>
-            {{range .Files}}
-            <tr>
-                <td class="logo-column">
-                    {{if .IsDir}}
-                    📁
-                    {{else if or (hasSuffix .Name ".mp4") (hasSuffix .Name ".avi") (hasSuffix .Name ".mov") (hasSuffix
-                    .Name ".mkv") (hasSuffix .Name ".flv") (hasSuffix .Name ".wmv") (hasSuffix .Name ".webm")}}
-                    🎥
-                    {{else if or (hasSuffix .Name ".jpg") (hasSuffix .Name ".jpeg") (hasSuffix .Name ".png") (hasSuffix
-                    .Name ".gif") (hasSuffix .Name ".bmp")}}
-                    📸
-                    {{else}}
-                    📄
-                    {{end}}
-                </td>
-                <td class="items">
-                    {{if .IsDir}}
-                    <a class="file-name" href="{{.FileURLFolder}}">{{.Name}}</a>
-                    {{else}}
-                    <a class="file-name" href="{{.FileURL}}">{{.Name}}</a>
-                    {{end}}
-                </td>
-            </tr>
-            {{end}}
-        </table>
-    </body>
+<body>
+
+    <div class="top-bar">
+        <img src="https://avatars.githubusercontent.com/u/50708771" alt="Your Image" class="top-bar-image">
+        <p class="top-bar-text"> Directory </p>
+    </div>
+
+    <div class="directory-div">
+        <h4 class="current-dir">{{.CurrentDir}}</h2>
+    </div>
+
+
+    <table>
+        {{range .Files}}
+        <tr>
+            <td class="logo-column">
+                {{if .IsDir}}
+                📁
+                {{else if or (hasSuffix .Name ".mp4") (hasSuffix .Name ".avi") (hasSuffix .Name ".mov") (hasSuffix
+                .Name ".mkv") (hasSuffix .Name ".flv") (hasSuffix .Name ".wmv") (hasSuffix .Name ".webm")}}
+                🎥
+                {{else if or (hasSuffix .Name ".jpg") (hasSuffix .Name ".jpeg") (hasSuffix .Name ".png") (hasSuffix
+                .Name ".gif") (hasSuffix .Name ".bmp")}}
+                📸
+                {{else}}
+                📄
+                {{end}}
+            </td>
+            <td class="items">
+                {{if .IsDir}}
+                <a class="file-name" href="{{.FileURLFolder}}">{{.Name}}</a>
+                {{else}}
+                <a class="file-name" href="{{.FileURL}}">{{.Name}}</a>
+                {{end}}
+            </td>
+        </tr>
+        {{end}}
+    </table>
+</body>
+
+</html>
