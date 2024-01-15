@@ -31,6 +31,9 @@
     a {
         color: black;
         text-decoration: none;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     a:active {
@@ -61,6 +64,37 @@
 
     .items {
         padding-right: 30px;
+    }
+
+
+    table {
+        border-collapse: separate;
+        border-spacing: 0 10px;
+    }
+
+    td {
+        padding: 10px;
+        background-color: #e4dbff;
+    }
+
+    td:nth-child(even) {
+        background-color: #f0f0f0;
+    }
+
+    td:first-child {
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+    }
+
+    td:last-child {
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+
+    td a {
+        display: block;
+        height: 100%;
+        width: 100%;
     }
 </style>
 
