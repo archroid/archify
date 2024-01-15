@@ -194,7 +194,10 @@ func handleDirectory(w http.ResponseWriter, r *http.Request) {
 			})
 		}
 	}
+	if directory == "" {
+		directory = "/"
 
+	}
 	dir := Directory{
 		CurrentDir: directory,
 		Files:      filesData,
