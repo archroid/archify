@@ -147,6 +147,8 @@ func handleReboot(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+
+
 // structs requiered for the template
 type File struct {
 	IsDir         bool
