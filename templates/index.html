@@ -1,66 +1,105 @@
 <!DOCTYPE html>
+
 <html>
-     <head>
-          <meta charset="UTF-8">
-          <meta name="viewport" content="width=device-width, initial-scale=1">
-          <title>archroid's HomeServer</title>       
-          <link href="style.css" rel="stylesheet">
-          <link rel="icon" href="https://avatars.githubusercontent.com/u/50708771">
-          <style>
-               body {
-                   display: flex;
-                   justify-content: center;
-                   align-items: center;
-                   height: 100vh;
-                   background-color: #f0f0f0;
-               }
-               .dashboard {
-                   display: flex;
-                   flex-direction: column;
-                   align-items: center;
-                   gap: 20px;
-               }
-               .dashboard button {
-                   padding: 10px 20px;
-                   font-size: 20px;
-                   cursor: pointer;
-                   border-radius: 50px;
-               }
-           </style>
-     </head>
 
-     <body>
-          <div class="dashboard">
-               <button onclick="accessServer()">Directory</button>
-               <button onclick="ping()">ping</button>
-               <button onclick="reboot()">Reboot</button>
-               <button onclick="shutdown()">Shutdown</button>
-               <button onclick="sleep()">Sleep</button>
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<style>
+     @import url('https://fonts.googleapis.com/css2?family=Open+Sans');
+
+     @media (max-width: 600px) {
+          .container {
+               flex-direction: column;
+          }
+     }
+
+     .container {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+          background-color: #ffffff;
+
+     }
+
+     .box {
+          width: 100px;
+          height: 100px;
+          margin: 10px;
+          padding-right: 50px;
+          padding-left: 50px;
+          border-radius: 20px;
+          background-color: #f0f0f0;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+     }
+
+     .box p {
+          margin: 0;
+     }
+
+     body head {
+          background-color: #f0eeff;
+     }
+
+     p {
+          color: #26205e;
+          font-size: 20px;
+          font-family: 'Open Sans';
+          user-select: none;
+          font-weight: bold;
+
+     }
+
+     .box:active {
+          transform: scale(0.95);
+          background-color: #e0e0e0;
+     }
+</style>
+
+<body>
+     <div class="container">
+          <div class="box" onclick="accessServer()">
+               <p>Directory</p>
           </div>
+          <div class="box" onclick="shutdown()">
+               <p>Shutdown</p>
+          </div>
+          <div class="box" onclick="reboot()">
+               <p>Reboot</p>
+          </div>
+          <div class="box" onclick="sleep()">
+               <p>Sleep</p>
+          </div>
+     </div>
+     <script>
+          function ping() {
+               window.location.href = window.location.href + "/ping";
 
-          <script>
-               function ping() {
-                    window.location.href = window.location.href + "/ping";
+          }
 
-               }
-                    
-               function accessServer() {
-                    window.location.href = window.location.href + "/d/";
+          function accessServer() {
+               window.location.href = window.location.href + "/d/";
 
-                              }
+          }
 
-               function reboot() {
-                    window.location.href = window.location.href + "/reboot";
+          function reboot() {
+               window.location.href = window.location.href + "/reboot";
 
-               }
+          }
 
-               function shutdown() {
-                    window.location.href = window.location.href + "/shutdown";
-               }
+          function shutdown() {
+               window.location.href = window.location.href + "/shutdown";
+          }
 
-               function sleep() {
-                    window.location.href = window.location.href + "/sleep";
-               }
-          </script>
-     </body>
+          function sleep() {
+               window.location.href = window.location.href + "/sleep";
+          }
+     </script>
+
+</body>
+
 </html>
