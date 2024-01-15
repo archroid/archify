@@ -1,21 +1,6 @@
 <head>
     <link rel='icon' href='https://avatars.githubusercontent.com/u/50708771'>
     <title>Home Serv</title>
-    <style>
-        table {
-            width: 100%;
-        }
-
-        td {
-            word-wrap: break-word;
-        }
-
-        @media only screen and (max-width: 600px) {
-            td {
-                font-size: small;
-            }
-        }
-    </style>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 </head>
@@ -28,12 +13,8 @@
         font-size: 16px;
     }
 
-    a {
-        color: black;
-        text-decoration: none;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+    h4 {
+        color: rgb(124, 55, 174);
     }
 
     .items:active {
@@ -44,45 +25,25 @@
         border-collapse: collapse;
         width: auto;
         border: 0;
+        border-collapse: separate;
+        border-spacing: 0 5px;
+    }
+
+    @media only screen and (max-width: 600px) {
+        td {
+            font-size: small;
+        }
     }
 
     td {
         border: 0;
-        padding-top: 5px;
-        padding-bottom: 5px;
-        padding-left: 3px;
         font-size: 17px;
-    }
+        word-wrap: break-word;
 
-    h4 {
-        color: blue;
-    }
-
-    .inline-link {
-        display: inline-block;
-    }
-
-    .items {
-        padding-right: 30px;
-    }
-    
-
-
-    table {
-        border-collapse: separate;
-        border-spacing: 0 10px;
-    }
-
-    td {
-        padding: 10px;
-        background-color: #e4dbff;
-    }
-
-    td:nth-child(even) {
-        background-color: #f0f0f0;
     }
 
     td:first-child {
+        background-color: #e4dbff;
         border-top-left-radius: 10px;
         border-bottom-left-radius: 10px;
     }
@@ -90,12 +51,25 @@
     td:last-child {
         border-top-right-radius: 10px;
         border-bottom-right-radius: 10px;
+        background-color: #f0f0f0;
     }
 
-    td a {
+    .logo-column {
+        padding-right: 10px;
+        padding-left: 10px;
+    }
+
+    .file-name {
         display: block;
         height: 100%;
         width: 100%;
+        padding: 8px;
+        padding-right: 15px;
+        color: black;
+        text-decoration: none;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 </style>
 
@@ -106,7 +80,7 @@
         <table>
             {{range .Files}}
             <tr>
-                <td>
+                <td class="logo-column">
                     {{if .IsDir}}
                     📁
                     {{else if or (hasSuffix .Name ".mp4") (hasSuffix .Name ".avi") (hasSuffix .Name ".mov") (hasSuffix
@@ -121,9 +95,9 @@
                 </td>
                 <td class="items">
                     {{if .IsDir}}
-                    <a class="inline-link" href="{{.FileURLFolder}}">{{.Name}}</a>
+                    <a class="file-name" href="{{.FileURLFolder}}">{{.Name}}</a>
                     {{else}}
-                    <a class="inline-link" href="{{.FileURL}}">{{.Name}}</a>
+                    <a class="file-name" href="{{.FileURL}}">{{.Name}}</a>
                     {{end}}
                 </td>
             </tr>
