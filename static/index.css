@@ -1,0 +1,132 @@
+     @import url('https://fonts.googleapis.com/css2?family=Open+Sans');
+
+     @media (max-width: 600px) {
+          .container {
+               flex-direction: column;
+          }
+     }
+
+     body {
+          margin: 0;
+          padding: 0;
+          display: flex;
+          flex-direction: column;
+          min-height: 100vh;
+     }
+
+
+
+     main {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          flex: 1;
+     }
+
+     .container {
+          display: flex;
+          width: 100%;
+          justify-content: center;
+          align-items: center;
+          background-color: #ffffff;
+          position: relative;
+
+
+     }
+
+     .box {
+          width: 100px;
+          height: 100px;
+          margin: 10px;
+          padding-right: 50px;
+          padding-left: 50px;
+          border-radius: 20px;
+          background-color: #f0f0f0;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+     }
+
+     .box p {
+          margin: 0;
+     }
+
+     body head {
+          background-color: #f0eeff;
+     }
+
+     p {
+          color: #26205e;
+          font-size: 20px;
+          font-family: 'Open Sans';
+          user-select: none;
+          font-weight: bold;
+
+     }
+
+     .box:active {
+          transform: scale(0.95);
+          background-color: #e0e0e0;
+     }
+
+     .top-bar {
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: auto;
+          color: white;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background-color: #ffffff;
+
+     }
+
+     .top-bar-image {
+          height: 40px;
+          width: 40px;
+          border-radius: 50%;
+
+     }
+
+     .top-bar-text {
+          font-size: 25px;
+          font-family: 'Open Sans';
+          user-select: none;
+          font-weight: bold;
+          margin-left: 15px;
+
+     }
+
+     .footer {
+          left: 0;
+          bottom: 0;
+          width: 100%;
+          background-color: #f8f9fa;
+          color: black;
+          text-align: center;
+          padding: 10px 0;
+
+     }
+
+     .footer-text {
+          font-size: 10px;
+     }
+
+     .box-upload {
+          margin-top: 30px;
+          display: flex;
+          width: 100%;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+     }
+
+     .input-div {
+          background-color: #e4dbff;
+          border-radius: 10px;
+          max-width: fit-content;
+          width: 500px;
+          padding: 10px;
+     }
