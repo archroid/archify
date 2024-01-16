@@ -19,7 +19,7 @@ function upload() {
           .then(data => {
                const endTime = Date.now();
                const duration = endTime - startTime;
-               alert(`${JSON.stringify(data.resp)}, Time: ${duration} ms`);
+               alert(`${JSON.stringify(data.status)}, Took: ${duration} ms`);
           })
           .catch((error) => {
                alert('Error:', error);

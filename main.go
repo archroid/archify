@@ -291,6 +291,6 @@ func handleUpload(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.WriteHeader(http.StatusOK)
-	fmt.Fprintf(w, "{\"message\":\"OK\"}")
+	json.NewEncoder(w).Encode(map[string]string{"status": "done"})
 
 }
