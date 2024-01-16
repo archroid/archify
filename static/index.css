@@ -166,6 +166,10 @@
           background: #7871b6;
           color: white;
      }
+     .browse-button:active{
+          transform: scale(0.95);
+          background-color: #9746fb;
+     }
 
      .upload-button {
           border-radius: 20px;
@@ -179,4 +183,8 @@
           font-weight: bold;
           background: #26205e;
           color: white;
+     }
+     .upload-button:active{
+          transform: scale(0.95);
+          background-color: #7102f8;
      }
