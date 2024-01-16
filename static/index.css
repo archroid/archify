@@ -66,7 +66,7 @@
 
      }
 
-     .box:active .upload-button {
+     .box:active {
           transform: scale(0.95);
           background-color: #e0e0e0;
      }
