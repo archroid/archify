@@ -2,31 +2,33 @@ function upload() {
 
      // Get the file input element
      var fileInput = document.getElementById('file');
+     var progressBar = document.getElementById('uploadProgress');
 
      for (let i = 0; i < fileInput.files.length; i++) {
-
-          // Create a new FormData object
           var formData = new FormData();
-
-          // Add the file to the FormData object
           formData.append('myFile', fileInput.files[i]);
 
-          // const startTime = Date.now();
+          var xhr = new XMLHttpRequest();
 
-          // Send a POST request with the file data
-          fetch("/upload", {
-               method: 'POST',
-               body: formData
-          })
-               .then(response => response.json())
-               .then(data => {
-                    // const endTime = Date.now();
-                    // const duration = endTime - startTime;
-                    // alert(`${JSON.stringify(data.status)}, Took: ${duration} ms`);
-               })
-               .catch((error) => {
-                    alert('Error:', error);
-               });
+          // Update progress bar
+          xhr.upload.onprogress = function (e) {
+               if (e.lengthComputable) {
+                    progressBar.max = e.total;
+                    progressBar.value = e.loaded;
+               }
+          };
+
+          // Load end
+          xhr.onloadend = function () {
+               if (xhr.status == 200) {
+                    console.log("upload complete");
+               } else {
+                    console.log("upload failed");
+               }
+          };
+
+          xhr.open('POST', '/upload', true);
+          xhr.send(formData);
      }
 }
 document.getElementById('uploadForm').addEventListener('submit', function (e) {
