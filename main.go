@@ -119,7 +119,7 @@ func handleSite(w http.ResponseWriter, r *http.Request) {
 }
 
 func handleSleep(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("Suspention triggered"))
+	json.NewEncoder(w).Encode(map[string]string{"resp": "Sleeping"})
 
 	err := sleep()
 	if err != nil {
@@ -128,7 +128,7 @@ func handleSleep(w http.ResponseWriter, r *http.Request) {
 }
 
 func handleShutdown(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("Shutting down triggered"))
+	json.NewEncoder(w).Encode(map[string]string{"resp": "Shutting down"})
 
 	err := shutdown()
 	if err != nil {
@@ -137,7 +137,7 @@ func handleShutdown(w http.ResponseWriter, r *http.Request) {
 }
 
 func handleReboot(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("Rebooting triggered"))
+	json.NewEncoder(w).Encode(map[string]string{"resp": "Rebooting"})
 
 	err := reboot()
 	if err != nil {
