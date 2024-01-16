@@ -3,7 +3,7 @@
 <html>
 
 <head>
-    <link rel='icon' href='https://avatars.githubusercontent.com/u/50708771'>
+    <link rel='icon' href="/static/icon.jpeg">
     <title>Home Serv</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -97,15 +97,20 @@
         color: white;
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: space-between;
         background-color: #ffffff;
+    }
+
+    .topbar-mid-items {
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .top-bar-image {
         height: 40px;
         width: 40px;
         border-radius: 50%;
-
     }
 
     .top-bar-text {
@@ -119,6 +124,22 @@
         user-select: none;
         font-weight: bold;
     }
+
+    .home-button {
+        height: 40px;
+        width: 40px;
+        border-radius: 50%;
+        margin-left: 5px;
+    }
+
+    .home-button:hover {
+        cursor: pointer;
+    }
+
+    .home-button:active {
+        background-color: lightgray;
+        transform: scale(0.95);
+    }
 </style>
 
 
@@ -126,9 +147,14 @@
 <body>
 
     <div class="top-bar">
-        <img src="https://avatars.githubusercontent.com/u/50708771" alt="Your Image" class="top-bar-image">
 
-        <p class="top-bar-text"> Directory </p>
+       <img src="/static/home-icon.png" class="home-button" onclick="topHome()">
+
+
+        <div class="topbar-mid-items">
+            <img src="/static/icon.jpeg" alt="Your Image" class="top-bar-image">
+            <p class="top-bar-text"> Directory </p>
+        </div>
 
         <div class="switch-div">
             <label class="switch">
@@ -255,7 +281,12 @@
     function switchh() {
         var switchValue = document.getElementById("switch").checked ? "true" : "false";
         localStorage.setItem('hiddenFilesStatus', switchValue);
-        
-        window.location.href = window.location.origin+ "/hiddinfiles/" + switchValue;
+
+        window.location.href = window.location.origin + "/hiddinfiles/" + switchValue;
     }
+
+    function topHome() {
+        window.location.href = window.location.origin;
+    }
+
 </script>

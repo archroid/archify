@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"io"
 	"net"
 	"net/http"
 	"os"
@@ -46,21 +47,21 @@ func main() {
 		}
 	}
 
-	// HTTP routes and serves
-
-	// serve files in home directory
-	r2 := mux.NewRouter()
-	fs := http.FileServer(http.Dir(homePath))
-	r2.PathPrefix("/").Handler(http.StripPrefix("/", fs))
+	// HTTP routes and serve
 
 	// main http server
 	r := mux.NewRouter()
 
 	r.HandleFunc("/", handleSite)
+	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("./static"))))
+
+	r.PathPrefix("/d/").Handler(http.StripPrefix("/d/", http.FileServer(http.Dir(homePath))))
 
 	r.HandleFunc("/ping", handlePing)
 
-	r.HandleFunc("/d/{dir:.*}", handleDirectory)
+	r.HandleFunc("/dir/{dir:.*}", handleDirectory)
+	r.HandleFunc("/hiddinfiles/{bool}", handleHiddenFiles)
+	r.HandleFunc("/upload", handleUpload).Methods("POST")
 
 	r.HandleFunc("/shutdown", handleShutdown)
 	r.HandleFunc("/off", handleShutdown)
@@ -71,13 +72,7 @@ func main() {
 	r.HandleFunc("/sleep", handleSleep)
 	r.HandleFunc("/suspend", handleSleep)
 
-	r.HandleFunc("/hiddinfiles/{bool}", handleHiddenFiles)
-
 	// run bots and server in goroutines
-	go func() {
-		log.Error(http.ListenAndServe(":8090", r2))
-	}()
-
 	go func() {
 		log.Info("Server started: http://" + localip + ":8080")
 		log.Error(http.ListenAndServe(":8080", r))
@@ -192,8 +187,8 @@ func handleDirectory(w http.ResponseWriter, r *http.Request) {
 				filesData = append(filesData, File{
 					IsDir:         file.IsDir(),
 					Name:          file.Name(),
-					FileURL:       "http://" + localip + ":8090/" + directory + file.Name() + "/",
-					FileURLFolder: "http://" + localip + ":8080/d/" + directory + file.Name() + "/",
+					FileURL:       "http://" + localip + ":8080/d/" + directory + file.Name() + "/",
+					FileURLFolder: "http://" + localip + ":8080/dir/" + directory + file.Name() + "/",
 				})
 			}
 		}
@@ -202,8 +197,8 @@ func handleDirectory(w http.ResponseWriter, r *http.Request) {
 			filesData = append(filesData, File{
 				IsDir:         file.IsDir(),
 				Name:          file.Name(),
-				FileURL:       "http://" + localip + ":8090/" + directory + file.Name() + "/",
-				FileURLFolder: "http://" + localip + ":8080/d/" + directory + file.Name() + "/",
+				FileURL:       "http://" + localip + ":8080/d" + directory + file.Name() + "/",
+				FileURLFolder: "http://" + localip + ":8080/dir/" + directory + file.Name() + "/",
 			})
 
 		}
@@ -247,6 +242,53 @@ func handleHiddenFiles(w http.ResponseWriter, r *http.Request) {
 		showHiddenFiles = false
 	}
 
-	http.Redirect(w, r, "/d/", http.StatusSeeOther)
+	http.Redirect(w, r, "/dir/", http.StatusSeeOther)
 
+}
+
+func handleUpload(w http.ResponseWriter, r *http.Request) {
+	log.Warn("Uploading something")
+	// Parse the multipart form in the request
+	err := r.ParseMultipartForm(10 << 20) // limit your maxMultipartMemory to 10MB
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		log.Error(err)
+		return
+	}
+
+	dirPath := homePath + "/uploads/"
+	err = os.MkdirAll(dirPath, 0755)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		log.Error(err)
+		return
+	}
+
+	// Retrieve the file from form data
+	file, handler, err := r.FormFile("myFile") // "myFile" is the key of the input form
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		log.Error(err)
+		return
+	}
+	defer file.Close()
+
+	// Create a new file in the server's file system with the same name
+	// Assuming you have a folder named 'uploads'
+	dst, err := os.Create(homePath + "/uploads/" + handler.Filename)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		log.Error(err)
+		return
+	}
+	defer dst.Close()
+
+	// Copy the uploaded file to the created file on the filesystem
+	if _, err := io.Copy(dst, file); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		log.Error(err)
+		return
+	}
+
+	fmt.Fprintf(w, "Successfully Uploaded File\n")
 }

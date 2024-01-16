@@ -3,13 +3,13 @@
 <html>
 
 <head>
-     <link rel='icon' href='https://avatars.githubusercontent.com/u/50708771'>
+     <link rel='icon' href="/static/icon.jpeg">
      <meta charset="UTF-8">
      <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <style>
      @import url('https://fonts.googleapis.com/css2?family=Open+Sans');
-     
+
      @media (max-width: 600px) {
           .container {
                flex-direction: column;
@@ -98,14 +98,15 @@
           text-align: center;
           padding: 10px 0;
      }
-     .footer-text{
+
+     .footer-text {
           font-size: 10px;
      }
 </style>
 
 <body>
      <div class="top-bar">
-          <img src="https://avatars.githubusercontent.com/u/50708771" alt="Your Image" class="top-bar-image">
+          <img src="/static/icon.jpeg" alt="Your Image" class="top-bar-image">
           <p class="top-bar-text"> Home Server </p>
      </div>
 
@@ -122,6 +123,10 @@
           <div class="box" onclick="sleep()">
                <p>Sleep</p>
           </div>
+          <form id="uploadForm">
+               <input type="file" id="fileInput">
+               <button type="submit">Upload</button>
+          </form>
           <!-- <div class="box" onclick="ping()">
                <p>Ping</p>
           </div> -->
@@ -143,7 +148,7 @@
           }
 
           function accessServer() {
-               window.location.href = window.location.href + "/d/";
+               window.location.href = window.location.href + "/dir/";
 
           }
 
@@ -174,6 +179,34 @@
                          console.error('Error:', error);
                     });
           }
+
+          function upload() {
+               // Get the file input element
+               var fileInput = document.getElementById('fileInput');
+
+               // Create a new FormData object
+               var formData = new FormData();
+
+               // Add the file to the FormData object
+               formData.append('myFile', fileInput.files[0]);
+
+               // Send a POST request with the file data
+               fetch(window.location.href + '/upload', {
+                    method: "POST",
+                    body: formData
+               })
+                    .then(response => response.json())
+                    .then(data => console.log(data))
+                    .catch((error) => {
+                         console.error('Error:', error);
+                    });
+          }
+          document.getElementById('uploadForm').addEventListener('submit', function (e) {
+               console.log('Form submit event');
+               e.preventDefault();
+               upload();
+          });
+
      </script>
      <div class="footer">
           <p class="footer-text">© 2024 archroid. All rights reserved.</p>
