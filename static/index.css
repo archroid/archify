@@ -124,8 +124,10 @@
      .input-form {
           background-color: #e4dbff;
           border-radius: 20px;
-          width: 65vw;
-          margin: 40px;
+          width: 90vw;
+          max-width: 90vw;
+          margin-top: 40px;
+          margin-bottom: 40px;
           display: flex;
           flex-direction: column;
           align-items: center;
@@ -134,13 +136,12 @@
      }
 
      .input-div {
+          width: 80vw;
           display: flex;
           align-items: center;
-          justify-content: space-between;
+          justify-content: center;
           display: flex;
           flex-direction: row;
-
-
 
      }
 
@@ -148,11 +149,18 @@
           display: none;
      }
 
-     .file-name{
+     .file-name {
           display: none;
           margin: 15px;
           font-family: 'Open Sans';
-          
+          overflow-x: auto;
+          white-space: nowrap;
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+     }
+
+     .file-name::-webkit-scrollbar {
+          display: none;
      }
 
      .browse-button {
@@ -161,13 +169,15 @@
           padding: 10px;
           padding-right: 20px;
           padding-left: 20px;
+          margin-bottom: 10px;
           font-size: 12px;
           font-family: 'Open Sans';
           font-weight: bold;
           background: #7871b6;
           color: white;
      }
-     .browse-button:active{
+
+     .browse-button:active {
           transform: scale(0.95);
           background-color: #9746fb;
      }
@@ -185,7 +195,12 @@
           background: #26205e;
           color: white;
      }
-     .upload-button:active{
+
+     .upload-button:active {
           transform: scale(0.95);
           background-color: #7102f8;
+     }
+
+     .progresstion-bar {
+          width: 50vw;
      }
