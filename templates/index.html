@@ -125,7 +125,7 @@
           </div>
           <form id="uploadForm">
                <input type="file" id="fileInput">
-               <button type="submit">Upload</button>
+               <button type="submit" multiple>Upload</button>
           </form>
           <!-- <div class="box" onclick="ping()">
                <p>Ping</p>
@@ -181,6 +181,7 @@
           }
 
           function upload() {
+
                // Get the file input element
                var fileInput = document.getElementById('fileInput');
 
@@ -189,10 +190,11 @@
 
                // Add the file to the FormData object
                formData.append('myFile', fileInput.files[0]);
+               console.log(formData.get('myFile'));
 
                // Send a POST request with the file data
-               fetch(window.location.href + '/upload', {
-                    method: "POST",
+               fetch("/upload", {
+                    method: 'POST',
                     body: formData
                })
                     .then(response => response.json())
