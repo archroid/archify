@@ -130,9 +130,9 @@
 
         <p class="top-bar-text"> Directory </p>
 
-        <div class="theme-switch-div">
+        <div class="switch-div">
             <label class="switch">
-                <input type="checkbox" id="switch" name="switch" value="false">
+                <input type="checkbox" id="switch" name="switch" value="false" onchange="switchh()">
                 <span class="slider round"></span>
             </label>
         </div>
@@ -178,7 +178,7 @@
 </html>
 
 <style>
-    .theme-switch-div {
+    .switch-div {
         margin-left: 20px;
     }
 
@@ -244,8 +244,18 @@
 </style>
 
 <script>
-    document.getElementById("switch").addEventListener("change", function () {
-        var switchValue = this.checked ? "true" : "false";
-        console.log(switchValue);
-    });
+
+    window.onload = function () {
+        var switchStatus = localStorage.getItem('hiddenFilesStatus');
+        if (switchStatus) {
+            document.getElementById("switch").checked = switchStatus === "true";
+        }
+    }
+
+    function switchh() {
+        var switchValue = document.getElementById("switch").checked ? "true" : "false";
+        localStorage.setItem('hiddenFilesStatus', switchValue);
+        
+        window.location.href = window.location.origin+ "/hiddinfiles/" + switchValue;
+    }
 </script>

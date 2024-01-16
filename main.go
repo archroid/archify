@@ -19,6 +19,7 @@ import (
 
 var localip string
 var homePath string
+var showHiddenFiles = false
 
 func main() {
 
@@ -69,6 +70,8 @@ func main() {
 
 	r.HandleFunc("/sleep", handleSleep)
 	r.HandleFunc("/suspend", handleSleep)
+
+	r.HandleFunc("/hiddinfiles/{bool}", handleHiddenFiles)
 
 	// run bots and server in goroutines
 	go func() {
@@ -147,8 +150,6 @@ func handleReboot(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-
-
 // structs requiered for the template
 type File struct {
 	IsDir         bool
@@ -185,17 +186,29 @@ func handleDirectory(w http.ResponseWriter, r *http.Request) {
 		directory = strings.TrimSuffix(directory, "/")
 
 	}
-
-	for _, file := range files {
-		if !strings.HasPrefix(file.Name(), ".") {
+	if !showHiddenFiles {
+		for _, file := range files {
+			if !strings.HasPrefix(file.Name(), ".") {
+				filesData = append(filesData, File{
+					IsDir:         file.IsDir(),
+					Name:          file.Name(),
+					FileURL:       "http://" + localip + ":8090/" + directory + file.Name() + "/",
+					FileURLFolder: "http://" + localip + ":8080/d/" + directory + file.Name() + "/",
+				})
+			}
+		}
+	} else {
+		for _, file := range files {
 			filesData = append(filesData, File{
 				IsDir:         file.IsDir(),
 				Name:          file.Name(),
 				FileURL:       "http://" + localip + ":8090/" + directory + file.Name() + "/",
 				FileURLFolder: "http://" + localip + ":8080/d/" + directory + file.Name() + "/",
 			})
+
 		}
 	}
+
 	if directory == "" {
 		directory = "/"
 
@@ -217,9 +230,23 @@ func handleDirectory(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	// get connected user's ip and port, split it by ip and log warn to server.
+
 	ip := strings.Split(r.RemoteAddr, ":")[0]
 
 	log.Warnf("Dir Access: %s", ip)
+
+}
+
+func handleHiddenFiles(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	bool := vars["bool"]
+
+	if bool == "true" {
+		showHiddenFiles = true
+	} else {
+		showHiddenFiles = false
+	}
+
+	http.Redirect(w, r, "/d/", http.StatusSeeOther)
 
 }
