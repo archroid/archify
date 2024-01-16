@@ -149,6 +149,7 @@
      }
 
      .file-name{
+          display: none;
           margin: 15px;
           font-family: 'Open Sans';
           

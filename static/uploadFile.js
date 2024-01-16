@@ -33,7 +33,11 @@ document.getElementById('uploadForm').addEventListener('submit', function (e) {
 
 function itemselect(target) {
      const fileNames = Array.from(target.files).map(file => file.name);
-     const allNames = fileNames.join("<br>");     
-     document.getElementById("file-name").innerHTML = allNames;
+     const allNames = fileNames.join("<br>");
+     
+     textfile = document.getElementById("file-name");
+     textfile.innerHTML = allNames;
+     textfile.style.display = "block";
+
 
 }
