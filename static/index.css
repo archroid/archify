@@ -1,6 +1,6 @@
      @import url('https://fonts.googleapis.com/css2?family=Open+Sans');
 
-     @media (max-width: 600px) {
+     @media (max-width: 1000px) {
           .container {
                flex-direction: column;
           }
@@ -71,11 +71,6 @@
           background-color: #e0e0e0;
      }
 
-     .upload-button {
-          transform: scale(0.95);
-          background-color: #e0e0e0;
-     }
-
      .top-bar {
           top: 0;
           left: 0;
@@ -117,10 +112,12 @@
      }
 
      .footer-text {
-          font-size: 10px;
+          font-size: 12px;
+          font-family: 'Open Sans';
+          
      }
 
-
+     /* 
      .input-form {
           background-color: #e4dbff;
           border-radius: 20px;
@@ -145,9 +142,7 @@
 
      }
 
-     .input-file {
-          display: none;
-     }
+
 
      .file-name {
           display: none;
@@ -203,4 +198,178 @@
 
      .progresstion-bar {
           width: 50vw;
+     } */
+
+     .itemm{
+          color: #26205e;
+          font-size: 22px;
+          font-family: 'Open Sans';
+          user-select: none;
+          font-weight: bold;
+          margin-bottom: 20px;
+          /* margin-top: 30px; */
+     }
+
+     hr{
+          width: 80vw;
+          color: #d9d9d9;
+          border-width: 1px;
+          border-style: solid;
+     }
+
+     /* smaller screens */
+     @media (max-width: 1000px) {
+          .upload-div {
+               width: 90vw;
+               flex-direction: column;
+          }
+          .upload-form {
+               width: 90vw;
+               margin-bottom: 15px;
+          }
+
+          .file-list-div {
+               width: 90vw;
+               margin-bottom: 15px;
+          }
+          .progresstion-bar{
+               width: 90vw;
+          }
+     }
+
+     /* larger screens */
+     @media (min-width: 1000px) {
+          .upload-div{
+               width: 80vw;
+               flex-direction: row;
+          }
+
+          .upload-form {
+               width: 40vw;
+               margin-right: 15px;
+          }
+          .file-list-div {
+               width: 40vw;
+               margin-left: 15px;
+          }
+          .progresstion-bar{
+               width: 40vw;
+          }
+     }
+
+     .upload-div {
+          margin: 30px;
+          margin-top: 10px;
+          display: flex;
+          justify-content: center;
+     }
+
+
+     .upload-container {
+          display: flex;
+          flex-direction: row;
+     }
+
+     .select-label {
+          height: 100%;
+          /* border: 2px #7F33D7 dashed; */
+          background-color: #f0f0f0;
+          border-radius: 13px;
+          display: flex;
+          flex-direction: column;
+          cursor: pointer;
+          align-items: center;
+          justify-content: center;
+     }
+
+     .input-file {
+          display: none;
+     }
+
+     .upload-image {
+          width: 70px;
+          height: 70px;
+          margin-top: 40px;
+     }
+
+     .dummy-button-input-div {
+          max-width: 10vw;
+          border-radius: 20px;
+          border: 0px;
+          background-color: #26205e;
+          padding: 7px;
+          padding-right: 50px;
+          padding-left: 50px;
+          color: white;
+          font-family: 'Open Sans';
+          font-size: 16px;
+          font-weight: bold;
+          margin-top: 20px;
+          text-align: center;
+
+     }
+
+     .select-text {
+          font-size: 15px;
+          font-family: 'Open Sans';
+          user-select: none;
+          font-weight: bold;
+          color: #9a9a9a;
+          margin-top: 20px;
+          margin-bottom: 40px;
+     }
+
+
+
+     .file-list-div {
+          display: flex;
+          flex-direction: column;
+     }
+
+     .uploading-files-text {
+          font-size: 20px;
+          font-family: 'Open Sans';
+          user-select: none;
+          font-weight: bold;
+          color: #242424;
+          margin-top: 10px;
+          margin-bottom: 0px;
+     }
+
+     .files-list {
+          height: 100%;
+          font-family: 'Open Sans';
+          color: #666666;
+          overflow-x: auto;
+          white-space: nowrap;
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+          margin-top: 10px;
+
+     }
+
+     .files-list::-webkit-scrollbar {
+          display: none;
+     }
+
+
+     .progresstion-bar{
+     }
+
+     .button-subimt{
+          border-radius: 20px;
+          border: 0px;
+          padding: 10px;
+          padding-right: 100px;
+          padding-left: 100px;
+          margin: 20px;
+          font-size: 15px;
+          font-family: 'Open Sans';
+          font-weight: bold;
+          background: #26205e;
+          color: white;
+     }
+     .button-subimt:active {
+          transform: scale(0.95);
+          background-color: #7102f8;
      }

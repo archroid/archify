@@ -39,11 +39,11 @@
 
           </div>
 
-
+          <!-- 
           <form id="uploadForm" class="input-form">
                <p class="item">Uploader</p>
                <div class="input-div">
-                    <p id="file-name" class="file-name"></p>  
+                    <p id="file-name" class="file-name"></p>
                     <input type="file" id="file" class="input-file" multiple onchange="itemselect(this)" />
                     <label for="file" class="browse-button">
                          Browse
@@ -51,8 +51,34 @@
                </div>
                <progress id="uploadProgress" class="progresstion-bar" value="0" max="100"></progress>
                <button type="submit" class="upload-button">Upload</button>
+          </form> -->
 
-          </form>
+          <hr class="hr">
+
+          <p class="itemm">Uploader</p>
+
+          <div class="upload-div">
+
+               <form id="uploadForm" class="upload-form">
+                    <input type="file" id="file" class="input-file" multiple onchange="itemselect(this)" />
+                    <label for="file" class="select-label">
+                         <img src="/static/upload.png" class="upload-image">
+                         <div class="dummy-button-input-div">Browse</div>
+                         <p class="select-text">Select file(s)</p>
+                    </label>
+               </form>
+
+               <div class="file-list-div">
+                    <p class="uploading-files-text">Files</p>
+                    <p id="file-name" class="files-list"></p>
+                    <progress id="uploadProgress" class="progresstion-bar" value="0" max="100"></progress>
+
+                    <button id="btnSubmit" class="button-subimt" onclick="upload()">Upload</button>
+               </div>
+
+
+
+          </div>
 
 
 
