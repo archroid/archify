@@ -21,34 +21,37 @@
 
           <div class="container">
                <div class="box" onclick="accessServer()">
-                    <p>Directory</p>
+                    <p class="item">Directory</p>
                </div>
                <div class="box" onclick="shutdown()">
-                    <p>Shutdown</p>
+                    <p class="item">Shutdown</p>
                </div>
                <div class="box" onclick="reboot()">
-                    <p>Reboot</p>
+                    <p class="item">Reboot</p>
                </div>
                <div class="box" onclick="sleep()">
-                    <p>Sleep</p>
+                    <p class="item">Sleep</p>
                </div>
 
                <div class="box" onclick="ping()">
-                    <p>Ping</p>
+                    <p class="item">Ping</p>
                </div>
 
           </div>
 
+
           <form id="uploadForm" class="input-form">
-               <div class="div-input">
-                    <p>Uploader</p>
+               <p class="item">Uploader</p>
+               <div class="input-div">
+                    <p id="file-name" class="file-name"></p>  
+                    <input type="file" id="file" class="input-file" multiple onchange="itemselect(this)" />
+                    <label for="file" class="browse-button">
+                         Browse
+                    </label>
                </div>
-               <input type="file" id="fileInput" class="file-input" multiple />
-               <button type="button" class="browse-button">Browse</button>
-               <div class="div-input">
-                    <button type="submit" class="upload-button">Upload</button>
-               </div>
+               <button type="submit" class="upload-button">Upload</button>
           </form>
+
 
 
 

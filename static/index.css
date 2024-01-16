@@ -56,7 +56,8 @@
           background-color: #f0eeff;
      }
 
-     p {
+     .item,
+     .top-bar-text {
           color: #26205e;
           font-size: 20px;
           font-family: 'Open Sans';
@@ -65,7 +66,12 @@
 
      }
 
-     .box:active {
+     .box:active .upload-button {
+          transform: scale(0.95);
+          background-color: #e0e0e0;
+     }
+
+     .upload-button {
           transform: scale(0.95);
           background-color: #e0e0e0;
      }
@@ -114,25 +120,41 @@
           font-size: 10px;
      }
 
-     .box-upload {
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-     }
 
      .input-form {
           background-color: #e4dbff;
           border-radius: 20px;
-          max-width: fit-content;
-          width: 100%;
-          padding: 10px;
-          margin-top: 30px;
-          width: 100%;
+          width: 65vw;
+          margin: 40px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
 
      }
 
-     .browse-button{
+     .input-div {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          display: flex;
+          flex-direction: row;
+
+
+
+     }
+
+     .input-file {
+          display: none;
+     }
+
+     .file-name{
+          margin: 15px;
+          font-family: 'Open Sans';
+          
+     }
+
+     .browse-button {
           border-radius: 50px;
           border: 0px;
           padding: 10px;
@@ -145,24 +167,16 @@
           color: white;
      }
 
-     .upload-button{
+     .upload-button {
           border-radius: 20px;
           border: 0px;
           padding: 10px;
           padding-right: 100px;
           padding-left: 100px;
-          margin-top: 20px;
-          margin-bottom: 20dp;
+          margin: 20px;
           font-size: 15px;
           font-family: 'Open Sans';
           font-weight: bold;
           background: #26205e;
           color: white;
      }
-     .div-input{
-          width: 100%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-     }
-

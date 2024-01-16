@@ -1,7 +1,7 @@
 function upload() {
 
      // Get the file input element
-     var fileInput = document.getElementById('fileInput');
+     var fileInput = document.getElementById('file');
 
      // Create a new FormData object
      var formData = new FormData();
@@ -30,3 +30,10 @@ document.getElementById('uploadForm').addEventListener('submit', function (e) {
      upload();
 });
 
+
+function itemselect(target) {
+     const fileNames = Array.from(target.files).map(file => file.name);
+     const allNames = fileNames.join("<br>");     
+     document.getElementById("file-name").innerHTML = allNames;
+
+}
