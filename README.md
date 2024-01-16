@@ -5,7 +5,7 @@ Script that serves my own home directory for my home network
 
 My personal homeServer and telegram/discord bot to watch movies on my pc and control it with my phone.
 
-![](./screenshot.png)
+![](./screenshots/screenshot2.png)
 
 
 ## 🔨 Installation
@@ -17,13 +17,18 @@ My personal homeServer and telegram/discord bot to watch movies on my pc and con
 git clone https://github.com/archroid/homeServe.git
 ```
 
-3. export `DISCORD_BOT_TOKEN` & `DISCORD_BOT_TOKEN`.
+3. export `DISCORD_BOT_TOKEN` & `DISCORD_BOT_TOKEN` .
+Also don't forget `Home_path` as the directory you want to serve.
 
 ```sh
 export  DISCORD_BOT_TOKEN={DISCORD_BOT_TOKEN}
 
 export  TELEGRAM_BOT_TOKEN={TELEGRAM_BOT_TOKEN}
+
+export  HOME_PATH={HOME_PATH}
 ```
+
+* Alternatively you can create a `.env` file in the project root directory and add the above variables there.
 
 * See [this](https://www.writebots.com/discord-bot-token/) and [this](https://core.telegram.org/bots/tutorial#obtain-your-bot-token) to make a bot and get your tokens.
 
@@ -40,5 +45,6 @@ go run .
 
 
 ## 📷 Screenshots
-![](./screenshot2.png)
+![](./screenshots/screenshot1.png)
+![](./screenshots/screenshot3.png)
 
