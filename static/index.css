@@ -115,18 +115,54 @@
      }
 
      .box-upload {
-          margin-top: 30px;
           display: flex;
-          width: 100%;
           flex-direction: column;
           justify-content: center;
           align-items: center;
      }
 
-     .input-div {
+     .input-form {
           background-color: #e4dbff;
-          border-radius: 10px;
+          border-radius: 20px;
           max-width: fit-content;
-          width: 500px;
+          width: 100%;
           padding: 10px;
+          margin-top: 30px;
+          width: 100%;
+
      }
+
+     .browse-button{
+          border-radius: 50px;
+          border: 0px;
+          padding: 10px;
+          padding-right: 20px;
+          padding-left: 20px;
+          font-size: 12px;
+          font-family: 'Open Sans';
+          font-weight: bold;
+          background: #7871b6;
+          color: white;
+     }
+
+     .upload-button{
+          border-radius: 20px;
+          border: 0px;
+          padding: 10px;
+          padding-right: 100px;
+          padding-left: 100px;
+          margin-top: 20px;
+          margin-bottom: 20dp;
+          font-size: 15px;
+          font-family: 'Open Sans';
+          font-weight: bold;
+          background: #26205e;
+          color: white;
+     }
+     .div-input{
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+     }
+

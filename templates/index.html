@@ -32,22 +32,24 @@
                     <p>Sleep</p>
                </div>
 
-               <!-- <div class="box" onclick="ping()">
-               <p>Ping</p>
-          </div> -->
-          </div>
-
-          <div class="box-upload">
-
-               <div class="input-div">
-                    <label for="upload-photo">Browse...</label>
-                    <input type="file"  id="fileInput" class="file-input" multiple />
+               <div class="box" onclick="ping()">
+                    <p>Ping</p>
                </div>
 
-
-               
-               <button type="submit">Upload</button>
           </div>
+
+          <form id="uploadForm" class="input-form">
+               <div class="div-input">
+                    <p>Uploader</p>
+               </div>
+               <input type="file" id="fileInput" class="file-input" multiple />
+               <button type="button" class="browse-button">Browse</button>
+               <div class="div-input">
+                    <button type="submit" class="upload-button">Upload</button>
+               </div>
+          </form>
+
+
 
      </main>
 
@@ -58,3 +60,5 @@
 </body>
 
 </html>
+
+<script src="/static/uploadFile.js"></script>

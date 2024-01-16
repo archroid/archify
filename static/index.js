@@ -46,32 +46,3 @@ function sleep() {
           });
 }
 
-function upload() {
-
-     // Get the file input element
-     var fileInput = document.getElementById('fileInput');
-
-     // Create a new FormData object
-     var formData = new FormData();
-
-     // Add the file to the FormData object
-     formData.append('myFile', fileInput.files[0]);
-     console.log(formData.get('myFile'));
-
-     // Send a POST request with the file data
-     fetch("/upload", {
-          method: 'POST',
-          body: formData
-     })
-          .then(response => response.json())
-          .then(data => console.log(data))
-          .catch((error) => {
-               console.error('Error:', error);
-          });
-}
-document.getElementById('uploadForm').addEventListener('submit', function (e) {
-     console.log('Form submit event');
-     e.preventDefault();
-     upload();
-});
-
