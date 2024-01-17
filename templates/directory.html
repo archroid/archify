@@ -148,7 +148,7 @@
 
     <div class="top-bar">
 
-       <img src="/static/home-icon.png" class="home-button" onclick="topHome()">
+        <img src="/static/home-icon.png" class="home-button" onclick="topHome()">
 
 
         <div class="topbar-mid-items">
@@ -185,6 +185,12 @@
                 {{else if or (hasSuffix .Name ".jpg") (hasSuffix .Name ".jpeg") (hasSuffix .Name ".png") (hasSuffix
                 .Name ".gif") (hasSuffix .Name ".bmp")}}
                 📸
+                {{else if or (hasSuffix .Name ".zip") (hasSuffix .Name ".rar") (hasSuffix .Name ".7z") (hasSuffix
+                .Name ".tar") (hasSuffix .Name ".gz") (hasSuffix .Name ".bz2") (hasSuffix .Name ".xz")}}
+                📦
+                {{else if or (hasSuffix .Name ".mp3") (hasSuffix .Name ".wav") (hasSuffix .Name ".ogg") (hasSuffix
+                .Name ".flac")}}
+                🎵
                 {{else}}
                 📄
                 {{end}}

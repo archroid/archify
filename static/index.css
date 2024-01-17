@@ -154,6 +154,9 @@
           .progresstion-bar {
                width: 90vw;
           }
+          td:last-child {
+               max-width:80vw;
+          }
      }
 
      /* larger screens */
@@ -175,6 +178,9 @@
 
           .progresstion-bar {
                width: 40vw;
+          }
+          td:last-child {
+               max-width:40vw;
           }
      }
 
@@ -257,23 +263,6 @@
           margin-bottom: 0px;
      }
 
-     .files-list {
-          height: 100%;
-          font-family: 'Open Sans';
-          color: #666666;
-          overflow-x: auto;
-          white-space: nowrap;
-          scrollbar-width: none;
-          -ms-overflow-style: none;
-          margin-top: 10px;
-
-     }
-
-     .files-list::-webkit-scrollbar {
-          display: none;
-     }
-
-
 
      .button-subimt {
           border-radius: 20px;
@@ -294,22 +283,71 @@
           background-color: #7102f8;
      }
 
-     .progresstion-bar{
+     .progresstion-bar {
           visibility: hidden;
      }
 
      progress {
-          border-radius: 7px; 
-          height: 10px;
-          
-        }
-        progress::-webkit-progress-bar {
           border-radius: 7px;
-        }
-        progress::-webkit-progress-value {
+          height: 10px;
+
+     }
+
+     progress::-webkit-progress-bar {
+          border-radius: 7px;
+     }
+
+     progress::-webkit-progress-value {
           background-color: #26205e;
           border-radius: 7px;
-        }
-        progress::-moz-progress-bar {
+     }
+
+     progress::-moz-progress-bar {
           /* style rules */
-        }
+     }
+
+
+     table {
+          border-collapse: separate;
+          border-spacing: 0 5px;
+          font-family: 'Open Sans';
+          color: #666666;
+          margin-top: 10px;
+          margin-right: 20px;
+     }
+
+     td {
+          border: 0;
+          font-size: 17px;
+          font-family: 'Open Sans';
+          word-wrap: break-word;
+          padding: 5px;
+
+     }
+
+     td:first-child {
+          background-color: #e4dbff;
+          border-top-left-radius: 10px;
+          border-bottom-left-radius: 10px;
+          padding-right: 10px;
+          padding-left: 10px;
+          width: 10px;
+          justify-content: center;
+          align-items: center;
+     }
+
+     td:last-child {
+          border-top-right-radius: 10px;
+          border-bottom-right-radius: 10px;
+          background-color: #f0f0f0;
+          overflow-x: auto;
+          white-space: nowrap;
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+          margin-right: 5px;
+          margin-left: 5px;
+     }
+
+     td:last-child::-webkit-scrollbar {
+          display: none;
+     }

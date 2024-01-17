@@ -49,14 +49,14 @@
                     <input type="file" id="file" class="input-file" multiple onchange="itemselect(this)" />
                     <label for="file" class="select-label">
                          <img src="/static/upload.png" class="upload-image">
-                         <div class="dummy-button-input-div">Browse</div>
+                         <p class="dummy-button-input-div">Browse</p>
                          <p class="select-text">Select file(s)</p>
                     </label>
                </form>
 
                <div class="file-list-div">
                     <p class="uploading-files-text">Files</p>
-                    <p id="file-name" class="files-list"></p>
+                    <table id="name-table" class="files-list"></table>
                     <progress id="uploadProgress" class="progresstion-bar" value="0" max="100"></progress>
 
                     <button id="btnSubmit" class="button-subimt" onclick="upload()">Upload</button>
