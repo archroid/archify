@@ -1,5 +1,7 @@
 mkdir -p bin
 
+go mod tidy
+
 GOOS=windows GOARCH=amd64 go build -o bin/homeserver-amd64.exe .
 GOOS=windows GOARCH=386 go build -o bin/homeserver-386.exe .
 

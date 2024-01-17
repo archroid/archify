@@ -1,6 +1,8 @@
 @echo off
 mkdir bin
 
+go mod tidy
+
 set GOOS=windows
 set GOARCH=amd64
 go build -o bin/homeserver-amd64.exe .
