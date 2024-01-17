@@ -66,6 +66,10 @@
 
      }
 
+     .top-bar-text{
+          cursor: pointer;
+     }
+
      .box:active {
           transform: scale(0.95);
           background-color: #e0e0e0;
@@ -88,6 +92,7 @@
           height: 40px;
           width: 40px;
           border-radius: 50%;
+          cursor: pointer;
 
      }
 
@@ -114,7 +119,12 @@
      .footer-text {
           font-size: 12px;
           font-family: 'Open Sans';
+     }
 
+
+     .footer-text a {
+          text-decoration: none; 
+          color: inherit; 
      }
 
      .itemm {
@@ -303,9 +313,6 @@
           border-radius: 7px;
      }
 
-     progress::-moz-progress-bar {
-          /* style rules */
-     }
 
 
      table {
