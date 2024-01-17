@@ -1,4 +1,4 @@
-module archroid/homeserver
+module archroid/archify
 
 go 1.21.5
 

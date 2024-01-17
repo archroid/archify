@@ -1,4 +1,4 @@
-package main
+package utils
 
 import (
 	"fmt"
@@ -9,7 +9,7 @@ import (
 	log "github.com/charmbracelet/log"
 )
 
-func shutdown() error {
+func Shutdown() error {
 
 	var cmd *exec.Cmd
 	switch runtime.GOOS {
@@ -34,7 +34,7 @@ func shutdown() error {
 	return nil
 }
 
-func reboot() error {
+func Reboot() error {
 	var cmd *exec.Cmd
 	switch runtime.GOOS {
 	case "windows":
@@ -59,7 +59,7 @@ func reboot() error {
 
 }
 
-func sleep() error {
+func Sleep() error {
 	var cmd *exec.Cmd
 	switch runtime.GOOS {
 	case "windows":

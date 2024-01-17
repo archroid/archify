@@ -5,6 +5,7 @@ import (
 	"net/url"
 	"os"
 
+	utils "archroid/archify/utils"
 	log "github.com/charmbracelet/log"
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 )
@@ -54,7 +55,7 @@ func telegramBot() error {
 
 			bot.Send(msg)
 
-			err := shutdown()
+			err := utils.Shutdown()
 			if err != nil {
 				msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Shut down Error"+err.Error())
 				msg.ReplyToMessageID = update.Message.MessageID
@@ -71,7 +72,7 @@ func telegramBot() error {
 
 			bot.Send(msg)
 
-			err := reboot()
+			err := utils.Reboot()
 			if err != nil {
 				msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Reboot Error"+err.Error())
 				msg.ReplyToMessageID = update.Message.MessageID
@@ -88,7 +89,7 @@ func telegramBot() error {
 
 			bot.Send(msg)
 
-			err := sleep()
+			err := utils.Sleep()
 			if err != nil {
 				msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Sleep Error"+err.Error())
 				msg.ReplyToMessageID = update.Message.MessageID

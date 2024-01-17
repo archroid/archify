@@ -7,10 +7,11 @@ import (
 	"net"
 	"net/http"
 	"os"
-	"os/signal"
 	"strings"
-	"syscall"
 	"text/template"
+
+	discordbot "archroid/archify/discordbot"
+	utils "archroid/archify/utils"
 
 	log "github.com/charmbracelet/log"
 	"github.com/common-nighthawk/go-figure"
@@ -79,31 +80,25 @@ func main() {
 	}()
 
 	go func() {
-		err := discordBot()
-
-		if err != nil {
-			log.Error("Discord bot failed to start:  ", err)
-			return
-		}
-	}()
-
-	go func() {
 		err := telegramBot()
 
 		if err != nil {
 			log.Error("Telegram bot failed to start:  ", err)
 			return
 		}
-
 	}()
-
-	// Wait here until CTRL-C or other term signal is received.
 
 	log.Info("Press CTRL-C to exit")
 
-	sc := make(chan os.Signal, 1)
-	signal.Notify(sc, syscall.SIGINT, syscall.SIGTERM, os.Interrupt)
-	<-sc
+	err = discordbot.RunSession()
+	if err != nil {
+		log.Error("Discord bot failed to start:  ", err)
+		return
+	}
+
+	// sc := make(chan os.Signal, 1)
+	// signal.Notify(sc, syscall.SIGINT, syscall.SIGTERM, os.Interrupt)
+	// <-sc
 
 }
 
@@ -120,7 +115,7 @@ func handleSite(w http.ResponseWriter, r *http.Request) {
 func handleSleep(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(map[string]string{"resp": "Sleeping"})
 
-	err := sleep()
+	err := utils.Sleep()
 	if err != nil {
 		http.Error(w, "Error suspending "+err.Error(), http.StatusInternalServerError)
 	}
@@ -129,7 +124,7 @@ func handleSleep(w http.ResponseWriter, r *http.Request) {
 func handleShutdown(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(map[string]string{"resp": "Shutting down"})
 
-	err := shutdown()
+	err := utils.Shutdown()
 	if err != nil {
 		http.Error(w, "Error shutting down "+err.Error(), http.StatusInternalServerError)
 	}
@@ -138,7 +133,7 @@ func handleShutdown(w http.ResponseWriter, r *http.Request) {
 func handleReboot(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(map[string]string{"resp": "Rebooting"})
 
-	err := reboot()
+	err := utils.Reboot()
 	if err != nil {
 		http.Error(w, "Error rebooting "+err.Error(), http.StatusInternalServerError)
 	}
