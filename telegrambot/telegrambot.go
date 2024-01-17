@@ -1,4 +1,4 @@
-package main
+package telegrambot
 
 import (
 	"net/http"
@@ -10,10 +10,10 @@ import (
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 )
 
-func telegramBot() error {
+func Run() error {
 
 	//setup proxy
-	proxyURL, err := url.Parse("http://127.0.0.1:2081") 
+	proxyURL, err := url.Parse("http://127.0.0.1:2081")
 	if err != nil {
 		return err
 	}
@@ -48,9 +48,17 @@ func telegramBot() error {
 			bot.Send(msg)
 		}
 
+		if update.Message.Text == "/ping" {
+
+			msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Pong!")
+			msg.ReplyToMessageID = update.Message.MessageID
+
+			bot.Send(msg)
+		}
+
 		if update.Message.Text == "/shutdown" || update.Message.Text == "/off" {
 
-			msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Shutting down triggered")
+			msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Shutting Down...")
 			msg.ReplyToMessageID = update.Message.MessageID
 
 			bot.Send(msg)
@@ -67,7 +75,7 @@ func telegramBot() error {
 
 		if update.Message.Text == "/reboot" {
 
-			msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Rebooting triggered")
+			msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Rebooting...")
 			msg.ReplyToMessageID = update.Message.MessageID
 
 			bot.Send(msg)
@@ -79,12 +87,12 @@ func telegramBot() error {
 
 				bot.Send(msg)
 			}
-			
+
 		}
 
 		if update.Message.Text == "/sleep" || update.Message.Text == "/suspend" {
 
-			msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Suspention triggered")
+			msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Sleeping...")
 			msg.ReplyToMessageID = update.Message.MessageID
 
 			bot.Send(msg)
@@ -96,7 +104,7 @@ func telegramBot() error {
 
 				bot.Send(msg)
 			}
-			
+
 		}
 
 	}

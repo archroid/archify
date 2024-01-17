@@ -11,6 +11,7 @@ import (
 	"text/template"
 
 	discordbot "archroid/archify/discordbot"
+	"archroid/archify/telegrambot"
 	utils "archroid/archify/utils"
 
 	log "github.com/charmbracelet/log"
@@ -80,7 +81,7 @@ func main() {
 	}()
 
 	go func() {
-		err := telegramBot()
+		err := telegrambot.Run()
 
 		if err != nil {
 			log.Error("Telegram bot failed to start:  ", err)

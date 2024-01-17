@@ -46,25 +46,26 @@ func RunSession() error {
 	// add handlers
 	dg.AddHandler(messageCreate)
 	dg.AddHandler(ready)
-	dg.AddHandler(func(s *discordgo.Session, i *discordgo.InteractionCreate) {
-		if h, ok := commandHandlers[i.ApplicationCommandData().Name]; ok {
-			h(s, i)
-		}
-	})
+
+	// dg.AddHandler(func(s *discordgo.Session, i *discordgo.InteractionCreate) {
+	// 	if h, ok := commandHandlers[i.ApplicationCommandData().Name]; ok {
+	// 		h(s, i)
+	// 	}
+	// })
 
 	err = dg.Open()
 	if err != nil {
 		return err
 	}
 	// adding slash commands
-	registeredCommands := make([]*discordgo.ApplicationCommand, len(commands))
-	for i, v := range commands {
-		cmd, err := dg.ApplicationCommandCreate(dg.State.User.ID, GuildID, v)
-		if err != nil {
-			log.Errorf("Cannot create '%v' command: %v", v.Name, err)
-		}
-		registeredCommands[i] = cmd
-	}
+	// registeredCommands := make([]*discordgo.ApplicationCommand, len(commands))
+	// for i, v := range commands {
+	// 	cmd, err := dg.ApplicationCommandCreate(dg.State.User.ID, GuildID, v)
+	// 	if err != nil {
+	// 		log.Errorf("Cannot create '%v' command: %v", v.Name, err)
+	// 	}
+	// 	registeredCommands[i] = cmd
+	// }
 
 	log.Info("Discord bot is now running")
 
@@ -73,13 +74,13 @@ func RunSession() error {
 	signal.Notify(sc, syscall.SIGINT, syscall.SIGTERM, os.Interrupt)
 	<-sc
 
-	for _, v := range registeredCommands {
-		log.Info("Deleting command: ", v.Name)
-		err := dg.ApplicationCommandDelete(dg.State.User.ID, GuildID, v.ID)
-		if err != nil {
-			log.Errorf("Cannot delete '%v' command: %v", v.Name, err)
-		}
-	}
+	// for _, v := range registeredCommands {
+	// 	log.Info("Deleting command: ", v.Name)
+	// 	err := dg.ApplicationCommandDelete(dg.State.User.ID, GuildID, v.ID)
+	// 	if err != nil {
+	// 		log.Errorf("Cannot delete '%v' command: %v", v.Name, err)
+	// 	}
+	// }
 
 	dg.Close()
 	return nil
@@ -92,6 +93,10 @@ func ready(s *discordgo.Session, event *discordgo.Ready) {
 func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 	if m.Author.ID == s.State.User.ID {
 		return
+	}
+
+	if m.Content == "ping" {
+		s.ChannelMessageSend(m.ChannelID, "Pong!")
 	}
 
 	if m.Content == "shutdown" || m.Content == "off" {
@@ -126,22 +131,22 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 }
 
-var (
-	commands = []*discordgo.ApplicationCommand{
-		{
-			Name:        "ping",
-			Description: "ping",
-		},
-	}
+// var (
+// 	commands = []*discordgo.ApplicationCommand{
+// 		{
+// 			Name:        "ping",
+// 			Description: "ping",
+// 		},
+// 	}
 
-	commandHandlers = map[string]func(s *discordgo.Session, i *discordgo.InteractionCreate){
-		"ping": func(s *discordgo.Session, i *discordgo.InteractionCreate) {
-			s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
-				Type: discordgo.InteractionResponseChannelMessageWithSource,
-				Data: &discordgo.InteractionResponseData{
-					Content: "pong",
-				},
-			})
-		},
-	}
-)
+// 	commandHandlers = map[string]func(s *discordgo.Session, i *discordgo.InteractionCreate){
+// 		"ping": func(s *discordgo.Session, i *discordgo.InteractionCreate) {
+// 			s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
+// 				Type: discordgo.InteractionResponseChannelMessageWithSource,
+// 				Data: &discordgo.InteractionResponseData{
+// 					Content: "pong",
+// 				},
+// 			})
+// 		},
+// 	}
+// )
