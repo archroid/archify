@@ -60,7 +60,7 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 	}
 
 	if m.Content == "shutdown" || m.Content == "off" {
-		s.ChannelMessageSend(m.ChannelID, "shutting down triggered")
+		s.ChannelMessageSend(m.ChannelID, "Shutting Down")
 
 		err := shutdown()
 		if err != nil {
@@ -71,17 +71,17 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 	}
 
 	if m.Content == "sleep" || m.Content == "suspend" {
-		s.ChannelMessageSend(m.ChannelID, "suspention triggered")
+		s.ChannelMessageSend(m.ChannelID, "Sleeping")
 
 		err := sleep()
 		if err != nil {
-			s.ChannelMessageSend(m.ChannelID, "Error suspending: "+err.Error())
+			s.ChannelMessageSend(m.ChannelID, "Error sleeping: "+err.Error())
 			return
 		}
 	}
 
 	if m.Content == "reboot" {
-		s.ChannelMessageSend(m.ChannelID, "rebooting triggered")
+		s.ChannelMessageSend(m.ChannelID, "Reeboting")
 
 		err := reboot()
 		if err != nil {
@@ -89,5 +89,7 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 			return
 		}
 	}
+
+	
 
 }
