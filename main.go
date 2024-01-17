@@ -25,7 +25,7 @@ var showHiddenFiles = false
 func main() {
 
 	//ASCII art on startup
-	myFigure := figure.NewColorFigure("Home Serve", "", "blue", false)
+	myFigure := figure.NewColorFigure("Home Serve", "", "blue", true)
 	myFigure.Print()
 
 	fmt.Println("")
@@ -145,7 +145,7 @@ func handleReboot(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-// structs requiered for the template
+// structs requiered for dir template
 type File struct {
 	IsDir         bool
 	Name          string
@@ -216,7 +216,7 @@ func handleDirectory(w http.ResponseWriter, r *http.Request) {
 	// Parse and execute the template
 	t, err := template.New("directory.html").Funcs(template.FuncMap{
 		"hasSuffix": strings.HasSuffix,
-	}).ParseFiles("directory.html")
+	}).ParseFiles("templates/directory.html")
 	if err != nil {
 		log.Fatal(err)
 	}

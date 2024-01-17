@@ -21,9 +21,9 @@ function accessServer() {
 function reboot() {
      fetch(window.location.href + "/reboot")
           .then(response => response.json())
-          .then(data => 
+          .then(data =>
                alert(`${JSON.stringify(data.resp)}`)
-               )
+          )
           .catch((error) => {
                console.error('Error:', error);
           });
