@@ -48,3 +48,9 @@ function sleep() {
           });
 }
 
+
+
+function opengithub() {
+     window.location.href = "https://github.com/archroid/archify"
+}
+

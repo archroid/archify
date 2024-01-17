@@ -285,6 +285,7 @@
 
      .progresstion-bar {
           visibility: hidden;
+          margin-top: 10px;
      }
 
      progress {

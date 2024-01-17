@@ -23,9 +23,8 @@ var homePath string
 var showHiddenFiles = false
 
 func main() {
-
 	//ASCII art on startup
-	myFigure := figure.NewColorFigure("Home Serve", "", "blue", true)
+	myFigure := figure.NewColorFigure("ARCHIFY", "", "blue", true)
 	myFigure.Print()
 
 	fmt.Println("")

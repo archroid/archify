@@ -5,19 +5,19 @@ go mod tidy
 
 set GOOS=windows
 set GOARCH=amd64
-go build -o bin/homeserver-amd64.exe .
+go build -o bin/archify-amd64.exe .
 set GOARCH=386
-go build -o bin/homeserver-386.exe .
+go build -o bin/archify-386.exe .
 
 set GOOS=darwin
 set GOARCH=amd64
-go build -o bin/homeserver-amd64-darwin .
+go build -o bin/archify-amd64-darwin .
 
 set GOOS=linux
 set GOARCH=amd64
-go build -o bin/homeserver-amd64-linux .
+go build -o bin/archify-amd64-linux .
 set GOARCH=386
-go build -o bin/homeserver-386-linux .
+go build -o bin/archify-386-linux .
 
 xcopy /E /I templates bin\templates
 xcopy /E /I static bin\static
