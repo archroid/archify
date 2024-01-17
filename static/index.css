@@ -293,3 +293,23 @@
           transform: scale(0.95);
           background-color: #7102f8;
      }
+
+     .progresstion-bar{
+          visibility: hidden;
+     }
+
+     progress {
+          border-radius: 7px; 
+          height: 10px;
+          
+        }
+        progress::-webkit-progress-bar {
+          border-radius: 7px;
+        }
+        progress::-webkit-progress-value {
+          background-color: #26205e;
+          border-radius: 7px;
+        }
+        progress::-moz-progress-bar {
+          /* style rules */
+        }

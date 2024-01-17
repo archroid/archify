@@ -18,6 +18,8 @@ function upload() {
 
         var xhr = new XMLHttpRequest();
 
+        progressBar.style.visibility = "visible";
+
         // Update progress bar
         xhr.upload.onprogress = function (e) {
             if (e.lengthComputable) {
