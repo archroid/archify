@@ -14,7 +14,7 @@ func Shutdown() error {
 	var cmd *exec.Cmd
 	switch runtime.GOOS {
 	case "windows":
-		cmd = exec.Command("shutdown", "/s")
+		cmd = exec.Command("shutdown", "/s", "/t" , "0")
 	case "linux":
 		cmd = exec.Command("shutdown", "-h", "now")
 	case "darwin":
@@ -38,7 +38,7 @@ func Reboot() error {
 	var cmd *exec.Cmd
 	switch runtime.GOOS {
 	case "windows":
-		cmd = exec.Command("shutdown", "/r")
+		cmd = exec.Command("shutdown", "/r" , "/t" , "0")
 	case "linux":
 		cmd = exec.Command("reboot")
 	case "darwin":
