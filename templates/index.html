@@ -1,81 +1,111 @@
 <!DOCTYPE html>
-
-<html>
+<html lang="en">
 
 <head>
-     <link rel='icon' href="/static/icon.jpeg">
      <meta charset="UTF-8">
-     <meta name="viewport" content="width=device-width, initial-scale=1">
-     <link rel="stylesheet" type="text/css" href="/static/index.css">
-     <script src="/static/index.js"></script>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+     <link rel="stylesheet" href="static/style.css">
      <title>Archify</title>
 </head>
 
-
 <body>
-     <div class="top-bar">
-          <img src="/static/icon.jpeg" class="top-bar-image" onclick="opengithub()">
-          <p class="top-bar-text" onclick="opengithub()"> Archify </p>
-     </div>
+     <nav>
+          <a href="#" class="logo">
+               <img src="https://avatars.githubusercontent.com/u/50708771?v=4">
+               <div class="logo-name"><span>Arch</span>ify</div>
+          </a>
+          <input type="checkbox" id="theme-toggle" hidden>
+          <label for="theme-toggle" class="theme-toggle"></label>
+          <a href="https://github.com/archroid/archify">
+               <svg height="32" aria-hidden="true" viewBox="0 0 16 16" version="1.1" width="32"
+                    data-view-component="true" class="octicon octicon-mark-github v-align-middle">
+                    <path
+                         d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z">
+                    </path>
+               </svg>
+          </a>
+     </nav>
+
      <main>
 
-          <div class="container">
-               <div class="box" onclick="accessServer()">
-                    <p class="item">Directory</p>
-               </div>
-               <div class="box" onclick="shutdown()">
-                    <p class="item">Shutdown</p>
-               </div>
-               <div class="box" onclick="reboot()">
-                    <p class="item">Reboot</p>
-               </div>
-               <div class="box" onclick="sleep()">
-                    <p class="item">Sleep</p>
+          <ul>
+               <li onclick="accessServer()">
+                    <i class='bx bx-folder'></i>
+                    <span>
+                         <h3>
+                              Directory
+                         </h3>
+                    </span>
+
+
+               </li>
+
+               <li onclick="shutdown()">
+                    <i class='bx bx-power-off'></i>
+                    <span>
+                         <h3>
+                              Shutdown
+                         </h3>
+                    </span>
+               </li>
+
+               <li onclick="reboot()">
+                    <i class='bx bx-reset'></i>
+                    <span class="info">
+                         <h3>
+                              Reboot
+                         </h3>
+                    </span>
+               </li>
+
+               <li onclick="sleep()">
+                    <i class='bx bx-folder'></i>
+                    <span>
+                         <h3>
+                              Sleep
+                         </h3>
+                    </span>
+               </li>
+          </ul>
+          <div class="upload-container">
+               <input type="file" id="file" multiple hidden onchange="itemselect(this)" />
+
+               <label for="file" class="browse-container">
+                    <i class='bx bx-file-find'></i> <span>
+                         <h3>
+                              Browse
+                         </h3>
+                    </span>
+               </label>
+
+               <div class="files-list-container">
+                    <div class="header">
+                         <i class='bx bx-file'></i>
+                         <h3>Selected Files</h3>
+                    </div>
+
+                    <table id="name-table">
+
+                    </table>
+
+                    <button class="upload-btn" onclick="upload()">
+                         <i class="bx bx-upload"></i>
+                         <span>Upload</span>
+                    </button>
                </div>
 
-               <div class="box" onclick="ping()">
-                    <p class="item">Ping</p>
-               </div>
+
 
           </div>
-
-          <hr class="hr">
-
-          <p class="itemm">Uploader</p>
-
-          <div class="upload-div">
-
-               <form id="uploadForm" class="upload-form">
-                    <input type="file" id="file" class="input-file" multiple onchange="itemselect(this)" />
-                    <label for="file" class="select-label">
-                         <img src="/static/upload.png" class="upload-image">
-                         <p class="dummy-button-input-div">Browse</p>
-                         <p class="select-text">Select file(s)</p>
-                    </label>
-               </form>
-
-               <div class="file-list-div">
-                    <p class="uploading-files-text">Files</p>
-                    <table id="name-table" class="files-list"></table>
-                    <progress id="uploadProgress" class="progresstion-bar" value="0" max="100"></progress>
-
-                    <button id="btnSubmit" class="button-subimt" onclick="upload()">Upload</button>
-               </div>
-
-
-
-          </div>
-
-
 
 
      </main>
 
 
-     <div class="footer">
-          <p class="footer-text">© 2024 <a href="https://github.com/archroid">archroid</a>. All rights reserved.</p>     </div>
 </body>
+
 
 </html>
 
-<script src="/static/uploadFile.js"></script>
+<script src="static/sciprt.js"></script>
