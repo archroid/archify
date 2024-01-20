@@ -263,7 +263,6 @@ main .upload-container .browse-container h3 {
 
 main .upload-container .files-list-container {
      flex-grow: 5;
-     /* flex-basis: 500px; */
 }
 
 main .upload-container .files-list-container .header {
@@ -285,6 +284,14 @@ main .upload-container .files-list-container table {
      border-collapse: collapse;
      margin-bottom: 20px;
      margin-left: 20px;
+     word-wrap: break-word;
+     scrollbar-width: none;
+}
+
+main .upload-container .files-list-container table td{
+     overflow-x: auto;
+     white-space: nowrap;
+     max-width: 75vw;
 }
 
 main .upload-container .files-list-container .upload-btn {
