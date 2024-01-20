@@ -221,18 +221,15 @@ main .upload-container label {
      border-radius: 20px;
      background: var(--light);
      padding: 20px;
-     overflow-x: auto;
-     min-width: 400px;
+
 }
 
 
 
 main .upload-container .browse-container {
      flex-grow: 1;
-     flex-basis: 300px;
      display: flex;
      align-items: center;
-     justify-content: center;
      grid-gap: 24px;
      cursor: pointer;
 }
@@ -254,7 +251,6 @@ main .upload-container .browse-container .bx {
      justify-content: center;
      background: var(--light-pink);
      color: var(--pink);
-     margin-bottom: 10px;
 }
 
 
@@ -267,7 +263,7 @@ main .upload-container .browse-container h3 {
 
 main .upload-container .files-list-container {
      flex-grow: 5;
-     flex-basis: 500px;
+     /* flex-basis: 500px; */
 }
 
 main .upload-container .files-list-container .header {

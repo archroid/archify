@@ -1,3 +1,24 @@
+const toggler = document.getElementById('theme-toggle');
+
+if (localStorage.getItem('isDarkMode') === "true") {
+     toggler.checked = true;
+     document.body.classList.add('dark');
+} else {
+     toggler.checked = false;
+     document.body.classList.remove('dark');
+}
+
+toggler.addEventListener('change', function () {
+     if (this.checked) {
+          document.body.classList.add('dark');
+          localStorage.setItem('isDarkMode', true);
+     } else {
+          document.body.classList.remove('dark');
+          localStorage.setItem('isDarkMode', false);
+     }
+});
+
+
 function ping() {
      const startTime = Date.now();
      fetch(window.location.href + "/ping")
@@ -49,15 +70,7 @@ function sleep() {
 }
 
 
-const toggler = document.getElementById('theme-toggle');
 
-toggler.addEventListener('change', function () {
-     if (this.checked) {
-          document.body.classList.add('dark');
-     } else {
-          document.body.classList.remove('dark');
-     }
-});
 
 
 function upload() {
