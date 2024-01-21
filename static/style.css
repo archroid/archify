@@ -309,7 +309,7 @@ main .upload-container .files-list-container .upload-btn {
      padding: 0 16px;
      border-radius: 36px;
      background: var(--primary);
-     color: var(--light);
+     color: #ffffff;
      display: flex;
      align-items: center;
      justify-content: center;
