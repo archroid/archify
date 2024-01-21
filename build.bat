@@ -19,8 +19,7 @@ go build -o bin/archify-amd64-linux .
 set GOARCH=386
 go build -o bin/archify-386-linux .
 
-xcopy /E /I templates bin\templates
-xcopy /E /I static bin\static
+xcopy /E /I web bin\web
 type nul > bin\.env
 
 set /p path="Enter the path of directory you want to serve, press enter to skip: "
