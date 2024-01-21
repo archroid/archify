@@ -25,4 +25,9 @@ read -p "Enter the your telegram bot token, press inter to skip " telegram
 echo "TELEGRAM_BOT_TOKEN=$telegram" >> bin/.env
 
 
+cd bin
+rm -rf archify.bin.all.platforms.zip
+zip -r archify.bin.all.platforms.zip *
+cd ..
+
 echo=done
