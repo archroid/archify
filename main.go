@@ -54,7 +54,7 @@ func main() {
 	r := mux.NewRouter()
 
 	r.HandleFunc("/", handleSite)
-	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("./static"))))
+	r.PathPrefix("/web").Handler(http.StripPrefix("/web", http.FileServer(http.Dir("./web"))))
 
 	r.PathPrefix("/d/").Handler(http.StripPrefix("/d/", http.FileServer(http.Dir(homePath))))
 
@@ -110,7 +110,7 @@ func handlePing(w http.ResponseWriter, r *http.Request) {
 }
 
 func handleSite(w http.ResponseWriter, r *http.Request) {
-	http.ServeFile(w, r, "./templates/index.html")
+	http.ServeFile(w, r, "./web/index.html")
 }
 
 func handleSleep(w http.ResponseWriter, r *http.Request) {
@@ -211,7 +211,7 @@ func handleDirectory(w http.ResponseWriter, r *http.Request) {
 	// Parse and execute the template
 	t, err := template.New("directory.html").Funcs(template.FuncMap{
 		"hasSuffix": strings.HasSuffix,
-	}).ParseFiles("templates/directory.html")
+	}).ParseFiles("web/directory.html")
 	if err != nil {
 		log.Fatal(err)
 	}
