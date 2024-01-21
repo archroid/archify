@@ -8,7 +8,9 @@ import (
 	"net"
 	"net/http"
 	"os"
+	"os/signal"
 	"strings"
+	"syscall"
 	"text/template"
 
 	discordbot "archroid/archify/discordbot"
@@ -95,12 +97,11 @@ func main() {
 	err = discordbot.RunSession()
 	if err != nil {
 		log.Error("Discord bot failed to start:  ", err)
-		return
 	}
 
-	// sc := make(chan os.Signal, 1)
-	// signal.Notify(sc, syscall.SIGINT, syscall.SIGTERM, os.Interrupt)
-	// <-sc
+	sc := make(chan os.Signal, 1)
+	signal.Notify(sc, syscall.SIGINT, syscall.SIGTERM, os.Interrupt)
+	<-sc
 
 }
 
