@@ -38,6 +38,10 @@
         opacity: 0.8;
     }
 
+    .main-div {
+        overflow: auto;
+    }
+
     table {
         border-collapse: collapse;
         width: 100%;
@@ -167,49 +171,51 @@
         </div>
 
 
-
-        <table>
-            {{range .Files}}
-            <tr>
-                {{if .IsDir}}
-                <td class="folder">
-                    <i class='bx bx-folder'></i>
-                </td>
-                {{else if or (hasSuffix .Name ".mp4") (hasSuffix .Name ".avi") (hasSuffix .Name ".mov") (hasSuffix
-                .Name ".mkv") (hasSuffix .Name ".flv") (hasSuffix .Name ".wmv") (hasSuffix .Name ".webm")}}
-                <td class="movie-play">
-                    <i class='bx bx-movie-play'></i>
-                </td>
-                {{else if or (hasSuffix .Name ".jpg") (hasSuffix .Name ".jpeg") (hasSuffix .Name ".png") (hasSuffix
-                .Name ".gif") (hasSuffix .Name ".bmp")}}
-                <td class="photo-album">
-                    <i class='bx bx-photo-album'></i>
-                </td>
-                {{else if or (hasSuffix .Name ".zip") (hasSuffix .Name ".rar") (hasSuffix .Name ".7z") (hasSuffix
-                .Name ".tar") (hasSuffix .Name ".gz") (hasSuffix .Name ".bz2") (hasSuffix .Name ".xz")}}
-                <td class="package">
-                    <i class='bx bx-package'></i>
-                </td>
-                {{else if or (hasSuffix .Name ".mp3") (hasSuffix .Name ".wav") (hasSuffix .Name ".ogg") (hasSuffix
-                .Name ".flac")}}
-                <td class="music">
-                    <i class='bx bx-music'></i>
-                </td>
-                {{else}}
-                <td class="file">
-                    <i class='bx bx-file'></i>
-                </td>
-                {{end}}
-                <td class="items">
+        <div class="main-div">
+            <table>
+                {{range .Files}}
+                <tr>
                     {{if .IsDir}}
-                    <a class="file-name" href="{{.FileURLFolder}}">{{.Name}}</a>
+                    <td class="folder">
+                        <i class='bx bx-folder'></i>
+                    </td>
+                    {{else if or (hasSuffix .Name ".mp4") (hasSuffix .Name ".avi") (hasSuffix .Name ".mov") (hasSuffix
+                    .Name ".mkv") (hasSuffix .Name ".flv") (hasSuffix .Name ".wmv") (hasSuffix .Name ".webm")}}
+                    <td class="movie-play">
+                        <i class='bx bx-movie-play'></i>
+                    </td>
+                    {{else if or (hasSuffix .Name ".jpg") (hasSuffix .Name ".jpeg") (hasSuffix .Name ".png") (hasSuffix
+                    .Name ".gif") (hasSuffix .Name ".bmp")}}
+                    <td class="photo-album">
+                        <i class='bx bx-photo-album'></i>
+                    </td>
+                    {{else if or (hasSuffix .Name ".zip") (hasSuffix .Name ".rar") (hasSuffix .Name ".7z") (hasSuffix
+                    .Name ".tar") (hasSuffix .Name ".gz") (hasSuffix .Name ".bz2") (hasSuffix .Name ".xz")}}
+                    <td class="package">
+                        <i class='bx bx-package'></i>
+                    </td>
+                    {{else if or (hasSuffix .Name ".mp3") (hasSuffix .Name ".wav") (hasSuffix .Name ".ogg") (hasSuffix
+                    .Name ".flac")}}
+                    <td class="music">
+                        <i class='bx bx-music'></i>
+                    </td>
                     {{else}}
-                    <a class="file-name" href="{{.FileURL}}">{{.Name}}</a>
+                    <td class="file">
+                        <i class='bx bx-file'></i>
+                    </td>
                     {{end}}
-                </td>
-            </tr>
-            {{end}}
-        </table>
+                    <td class="items">
+                        {{if .IsDir}}
+                        <a class="file-name" href="{{.FileURLFolder}}">{{.Name}}</a>
+                        {{else}}
+                        <a class="file-name" href="{{.FileURL}}">{{.Name}}</a>
+                        {{end}}
+                    </td>
+                </tr>
+                {{end}}
+            </table>
+        </div>
+
     </main>
 </body>
 
