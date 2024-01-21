@@ -11,6 +11,8 @@ GOOS=linux GOARCH=amd64 go build -o bin/homeserver-amd64-linux .
 GOOS=linux GOARCH=386 go build -o bin/homeserver-386-linux .
 
 cp -r web bin/
+
+rm -rf bin/.env
 touch bin/.env
 
 read -p "Enter the path of directory you want to serve, press interto skip " path
