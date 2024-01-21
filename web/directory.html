@@ -56,30 +56,14 @@
         border: 0;
         font-size: 17px;
         word-wrap: break-word;
-
     }
+
+
 
     td i {
         font-size: 1.5rem;
         color: var(--primary);
         padding: 10px;
-    }
-
-    td .bx-photo-album {
-        color: var(--success);
-    }
-
-    td .bx-package {
-        color: var(--danger);
-    }
-
-    td .bx-music,
-    td .bx-movie-play {
-        color: var(--pink);
-    }
-
-    td .bx-folder {
-        color: var(--warning);
     }
 
     td:first-child {
@@ -89,6 +73,50 @@
         text-align: center;
         width: 10px;
     }
+
+
+    table .photo-album {
+        background-color: var(--light-success);
+    }
+
+    td .bx-photo-album {
+        color: var(--success);
+    }
+
+
+
+    table .package {
+        background-color: var(--light-danger);
+    }
+
+    td .bx-package {
+        color: var(--danger);
+    }
+
+
+
+
+    table .music,
+    table .movie-play {
+        background-color: var(--light-pink);
+
+    }
+
+    td .bx-music,
+    td .bx-movie-play {
+        color: var(--pink);
+    }
+
+
+
+    table .folder {
+        background-color: var(--light-warning);
+    }
+
+    td .bx-folder {
+        color: var(--warning);
+    }
+
 
     td:last-child {
         border-top-right-radius: 10px;
@@ -115,26 +143,26 @@
 <body>
     <nav>
         <a href="/" class="logo">
-             <img src="/web/images/icon.svg">
-             <div class="logo-name"><span>Arch</span>ify</div>
+            <img src="/web/images/icon.svg">
+            <div class="logo-name"><span>Arch</span>ify</div>
         </a>
         <input type="checkbox" id="theme-toggle" hidden>
         <label for="theme-toggle" class="theme-toggle"></label>
         <a href="https://github.com/archroid/archify">
-             <svg height="32" aria-hidden="true" viewBox="0 0 16 16" version="1.1" width="32"
-                  data-view-component="true" class="octicon octicon-mark-github v-align-middle">
-                  <path
-                       d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z">
-                  </path>
-             </svg>
+            <svg height="32" aria-hidden="true" viewBox="0 0 16 16" version="1.1" width="32" data-view-component="true"
+                class="octicon octicon-mark-github v-align-middle">
+                <path
+                    d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z">
+                </path>
+            </svg>
         </a>
-   </nav>
+    </nav>
 
 
     <main>
         <div class="directory-div">
             <h4 class="current-dir">{{.CurrentDir}}</h2>
-            <!-- <input type="checkbox" id="theme-toggle" hidden>
+                <!-- <input type="checkbox" id="theme-toggle" hidden>
             <label for="theme-toggle" class="theme-toggle"></label> -->
         </div>
 
@@ -143,25 +171,35 @@
         <table>
             {{range .Files}}
             <tr>
-                <td class="logo-column">
-                    {{if .IsDir}}
+                {{if .IsDir}}
+                <td class="folder">
                     <i class='bx bx-folder'></i>
-                    {{else if or (hasSuffix .Name ".mp4") (hasSuffix .Name ".avi") (hasSuffix .Name ".mov") (hasSuffix
-                    .Name ".mkv") (hasSuffix .Name ".flv") (hasSuffix .Name ".wmv") (hasSuffix .Name ".webm")}}
-                    <i class='bx bx-movie-play'></i>
-                    {{else if or (hasSuffix .Name ".jpg") (hasSuffix .Name ".jpeg") (hasSuffix .Name ".png") (hasSuffix
-                    .Name ".gif") (hasSuffix .Name ".bmp")}}
-                    <i class='bx bx-photo-album'></i>
-                    {{else if or (hasSuffix .Name ".zip") (hasSuffix .Name ".rar") (hasSuffix .Name ".7z") (hasSuffix
-                    .Name ".tar") (hasSuffix .Name ".gz") (hasSuffix .Name ".bz2") (hasSuffix .Name ".xz")}}
-                    <i class='bx bx-package'></i>
-                    {{else if or (hasSuffix .Name ".mp3") (hasSuffix .Name ".wav") (hasSuffix .Name ".ogg") (hasSuffix
-                    .Name ".flac")}}
-                    <i class='bx bx-music'></i>
-                    {{else}}
-                    <i class='bx bx-file'></i>
-                    {{end}}
                 </td>
+                {{else if or (hasSuffix .Name ".mp4") (hasSuffix .Name ".avi") (hasSuffix .Name ".mov") (hasSuffix
+                .Name ".mkv") (hasSuffix .Name ".flv") (hasSuffix .Name ".wmv") (hasSuffix .Name ".webm")}}
+                <td class="movie-play">
+                    <i class='bx bx-movie-play'></i>
+                </td>
+                {{else if or (hasSuffix .Name ".jpg") (hasSuffix .Name ".jpeg") (hasSuffix .Name ".png") (hasSuffix
+                .Name ".gif") (hasSuffix .Name ".bmp")}}
+                <td class="photo-album">
+                    <i class='bx bx-photo-album'></i>
+                </td>
+                {{else if or (hasSuffix .Name ".zip") (hasSuffix .Name ".rar") (hasSuffix .Name ".7z") (hasSuffix
+                .Name ".tar") (hasSuffix .Name ".gz") (hasSuffix .Name ".bz2") (hasSuffix .Name ".xz")}}
+                <td class="package">
+                    <i class='bx bx-package'></i>
+                </td>
+                {{else if or (hasSuffix .Name ".mp3") (hasSuffix .Name ".wav") (hasSuffix .Name ".ogg") (hasSuffix
+                .Name ".flac")}}
+                <td class="music">
+                    <i class='bx bx-music'></i>
+                </td>
+                {{else}}
+                <td class="file">
+                    <i class='bx bx-file'></i>
+                </td>
+                {{end}}
                 <td class="items">
                     {{if .IsDir}}
                     <a class="file-name" href="{{.FileURLFolder}}">{{.Name}}</a>
