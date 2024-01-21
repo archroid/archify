@@ -86,9 +86,9 @@ body.dark {
      --light-pink: #2a1a2a;
 }
 
-.bx {
+/* .bx {
      font-size: 1.7rem;
-}
+} */
 
 nav {
      height: 56px;
@@ -171,8 +171,6 @@ nav #theme-toggle:checked+.theme-toggle::before {
      left: calc(100% - (25px - 4px) - 2px);
      content: "🌑";
      background: var(--light-primary);
-
-
 }
 
 nav a svg {

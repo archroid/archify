@@ -28,11 +28,13 @@
     .directory-div {
         background-color: var(--light);
         border-radius: 10px;
-        max-width: fit-content;
+        /* max-width: fit-content; */
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
     }
 
     .items:active {
-        /* background-color: lightgray; */
         opacity: 0.8;
     }
 
@@ -57,22 +59,41 @@
 
     }
 
+    td i {
+        font-size: 1.5rem;
+        color: var(--primary);
+        padding: 10px;
+    }
+
+    td .bx-photo-album {
+        color: var(--success);
+    }
+
+    td .bx-package {
+        color: var(--danger);
+    }
+
+    td .bx-music,
+    td .bx-movie-play {
+        color: var(--pink);
+    }
+
+    td .bx-folder {
+        color: var(--warning);
+    }
+
     td:first-child {
         background-color: var(--light-primary);
         border-top-left-radius: 10px;
         border-bottom-left-radius: 10px;
+        text-align: center;
+        width: 10px;
     }
 
     td:last-child {
         border-top-right-radius: 10px;
         border-bottom-right-radius: 10px;
         background-color: var(--light);
-    }
-
-    .logo-column {
-        padding-right: 10px;
-        padding-left: 10px;
-        width: 10px;
     }
 
     .file-name {
@@ -110,45 +131,48 @@
    </nav>
 
 
-<main>
-    <div class="directory-div">
-        <h4 class="current-dir">{{.CurrentDir}}</h2>
-    </div>
+    <main>
+        <div class="directory-div">
+            <h4 class="current-dir">{{.CurrentDir}}</h2>
+            <!-- <input type="checkbox" id="theme-toggle" hidden>
+            <label for="theme-toggle" class="theme-toggle"></label> -->
+        </div>
 
 
-    <table>
-        {{range .Files}}
-        <tr>
-            <td class="logo-column">
-                {{if .IsDir}}
-                📁
-                {{else if or (hasSuffix .Name ".mp4") (hasSuffix .Name ".avi") (hasSuffix .Name ".mov") (hasSuffix
-                .Name ".mkv") (hasSuffix .Name ".flv") (hasSuffix .Name ".wmv") (hasSuffix .Name ".webm")}}
-                🎥
-                {{else if or (hasSuffix .Name ".jpg") (hasSuffix .Name ".jpeg") (hasSuffix .Name ".png") (hasSuffix
-                .Name ".gif") (hasSuffix .Name ".bmp")}}
-                📸
-                {{else if or (hasSuffix .Name ".zip") (hasSuffix .Name ".rar") (hasSuffix .Name ".7z") (hasSuffix
-                .Name ".tar") (hasSuffix .Name ".gz") (hasSuffix .Name ".bz2") (hasSuffix .Name ".xz")}}
-                📦
-                {{else if or (hasSuffix .Name ".mp3") (hasSuffix .Name ".wav") (hasSuffix .Name ".ogg") (hasSuffix
-                .Name ".flac")}}
-                🎵
-                {{else}}
-                📄
-                {{end}}
-            </td>
-            <td class="items">
-                {{if .IsDir}}
-                <a class="file-name" href="{{.FileURLFolder}}">{{.Name}}</a>
-                {{else}}
-                <a class="file-name" href="{{.FileURL}}">{{.Name}}</a>
-                {{end}}
-            </td>
-        </tr>
-        {{end}}
-    </table>
-</main>
+
+        <table>
+            {{range .Files}}
+            <tr>
+                <td class="logo-column">
+                    {{if .IsDir}}
+                    <i class='bx bx-folder'></i>
+                    {{else if or (hasSuffix .Name ".mp4") (hasSuffix .Name ".avi") (hasSuffix .Name ".mov") (hasSuffix
+                    .Name ".mkv") (hasSuffix .Name ".flv") (hasSuffix .Name ".wmv") (hasSuffix .Name ".webm")}}
+                    <i class='bx bx-movie-play'></i>
+                    {{else if or (hasSuffix .Name ".jpg") (hasSuffix .Name ".jpeg") (hasSuffix .Name ".png") (hasSuffix
+                    .Name ".gif") (hasSuffix .Name ".bmp")}}
+                    <i class='bx bx-photo-album'></i>
+                    {{else if or (hasSuffix .Name ".zip") (hasSuffix .Name ".rar") (hasSuffix .Name ".7z") (hasSuffix
+                    .Name ".tar") (hasSuffix .Name ".gz") (hasSuffix .Name ".bz2") (hasSuffix .Name ".xz")}}
+                    <i class='bx bx-package'></i>
+                    {{else if or (hasSuffix .Name ".mp3") (hasSuffix .Name ".wav") (hasSuffix .Name ".ogg") (hasSuffix
+                    .Name ".flac")}}
+                    <i class='bx bx-music'></i>
+                    {{else}}
+                    <i class='bx bx-file'></i>
+                    {{end}}
+                </td>
+                <td class="items">
+                    {{if .IsDir}}
+                    <a class="file-name" href="{{.FileURLFolder}}">{{.Name}}</a>
+                    {{else}}
+                    <a class="file-name" href="{{.FileURL}}">{{.Name}}</a>
+                    {{end}}
+                </td>
+            </tr>
+            {{end}}
+        </table>
+    </main>
 </body>
 
 </html>
