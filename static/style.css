@@ -33,6 +33,7 @@ body {
      background: var(--grey);
      width: 100%;
      overflow-x: hidden;
+     transition: all 0.3s ease;
 }
 
 body.dark {
@@ -288,21 +289,18 @@ main .upload-container .files-list-container .header h3 {
 }
 
 main .upload-container .files-list-container table {
-     /* width: 100%; */
      border-collapse: collapse;
      margin-bottom: 20px;
      margin-left: 20px;
-     /* overflow-x: auto; */
-     /* word-wrap: break-word; */
-     /* word-wrap: break-word;
-     scrollbar-width: none; */
+
 }
 
-/* main .upload-container .files-list-container table td{
-     overflow-x: auto;
-     white-space: nowrap;
-     max-width: 100%;
-} */
+main .upload-container .files-list-container progress {
+     height: 10px;
+     margin: 10px;
+     margin-right: 20px;
+     width: 100%;
+}
 
 main .upload-container .files-list-container .upload-btn {
      height: 36px;

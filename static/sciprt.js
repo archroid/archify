@@ -70,9 +70,6 @@ function sleep() {
 }
 
 
-
-
-
 function upload() {
      // Get the file input element
      var fileInput = document.getElementById('file');
