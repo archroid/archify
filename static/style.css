@@ -296,6 +296,7 @@ main .upload-container .files-list-container table {
 }
 
 main .upload-container .files-list-container progress {
+     visibility: hidden;
      height: 10px;
      margin: 10px;
      margin-right: 20px;
