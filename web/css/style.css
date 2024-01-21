@@ -154,7 +154,9 @@ nav .theme-toggle {
 
 nav .theme-toggle::before {
      display: flex;
-     content: "☀️";
+     content: "☀";
+     color: var(--light);
+     background-color: var(--warning);
      align-items: center;
      justify-content: center;
      position: absolute;
@@ -162,17 +164,15 @@ nav .theme-toggle::before {
      left: 2px;
      bottom: 2px;
      width: calc(25px - 4px);
-     background: var(--light-warning);
      border-radius: 50%;
      transition: all 0.3s ease;
 }
 
 nav #theme-toggle:checked+.theme-toggle::before {
      left: calc(100% - (25px - 4px) - 2px);
-     content: "🌑";
-     background: var(--light-primary);
+     background: var(--primary);
+     content: "☾";
 }
-
 nav a svg {
      fill: var(--dark);
 }
