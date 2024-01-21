@@ -5,7 +5,7 @@ Script that serves my own home directory for my home network
 
 My personal homeServer and telegram/discord bot to watch movies on my pc and control it with my phone.
 
-![](./screenshots/screenshot2.png)
+![](./screenshots/screenshot.2.png)
 
 
 ## 🔨 Installation
@@ -45,6 +45,6 @@ go run .
 
 
 ## 📷 Screenshots
-![](./screenshots/screenshot1.png)
-![](./screenshots/screenshot3.png)
+![](./screenshots/screenshot.1.png)
+![](./screenshots/screenshot.3.png)
 
