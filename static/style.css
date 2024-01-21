@@ -2,9 +2,8 @@
 
 :root {
      --light: #f6f6f9;
-     --grey: #eee;
+     --grey: #eeeeee;
      --dark: #363949;
-
 
      --primary: #1976D2;
      --light-primary: #CFE8FF;
@@ -31,8 +30,8 @@
 }
 
 body {
-
      background: var(--grey);
+     width: 100%;
      overflow-x: hidden;
 }
 
@@ -216,8 +215,10 @@ main .upload-container {
      color: var(--dark);
 }
 
-main .upload-container div,
-main .upload-container label {
+
+
+main .upload-container .browse-container,
+main .upload-container .files-list-container {
      border-radius: 20px;
      background: var(--light);
      padding: 20px;
@@ -225,9 +226,9 @@ main .upload-container label {
 }
 
 
-
 main .upload-container .browse-container {
-     flex-grow: 1;
+     /* flex-grow: 1; */
+     /* flex-basis: 500px; */
      display: flex;
      align-items: center;
      grid-gap: 24px;
@@ -261,9 +262,9 @@ main .upload-container .browse-container h3 {
      color: var(--dark);
 }
 
-main .upload-container .files-list-container {
+/* main .upload-container .files-list-container {
      flex-grow: 5;
-}
+} */
 
 main .upload-container .files-list-container .header {
      display: flex;
@@ -280,19 +281,21 @@ main .upload-container .files-list-container .header h3 {
 }
 
 main .upload-container .files-list-container table {
-     width: 100%;
+     /* width: 100%; */
      border-collapse: collapse;
      margin-bottom: 20px;
      margin-left: 20px;
-     word-wrap: break-word;
-     scrollbar-width: none;
+     /* overflow-x: auto; */
+     /* word-wrap: break-word; */
+     /* word-wrap: break-word;
+     scrollbar-width: none; */
 }
 
-main .upload-container .files-list-container table td{
+/* main .upload-container .files-list-container table td{
      overflow-x: auto;
      white-space: nowrap;
-     max-width: 75vw;
-}
+     max-width: 100%;
+} */
 
 main .upload-container .files-list-container .upload-btn {
      height: 36px;
