@@ -12,72 +12,27 @@
 </head>
 
 <style>
-
-@font-face {
-     font-display: swap;
-     /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-     font-family: 'Poppins';
-     font-style: normal;
-     font-weight: 400;
-     src: url('/web/fonts/poppins-v20-latin-regular.woff2') format('woff2');
-     /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-}
-
-@font-face {
-     font-display: swap;
-     /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-     font-family: 'Poppins';
-     font-style: normal;
-     font-weight: 500;
-     src: url('/web/fonts/poppins-v20-latin-500.woff2') format('woff2');
-     /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-}
-
-@font-face {
-     font-display: swap;
-     /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-     font-family: 'Poppins';
-     font-style: normal;
-     font-weight: 600;
-     src: url('/web/fonts/poppins-v20-latin-600.woff2') format('woff2');
-     /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-}
-
-@font-face {
-     font-display: swap;
-     /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-     font-family: 'Poppins';
-     font-style: normal;
-     font-weight: 700;
-     src: url('/web/fonts/poppins-v20-latin-700.woff2') format('woff2');
-     /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-}
-
-*{
-    font-family: 'Poppins', sans-serif;
-}
     body {
         font-size: 16px;
-        padding-right: 20px;
     }
-
 
     .current-dir {
         padding: 10px;
         font-size: 17px;
         font-weight: 500;
-        color: #26205e;
+        color: var(--dark);
 
     }
 
     .directory-div {
-        background-color: #e4dbff;
+        background-color: var(--light);
         border-radius: 10px;
         max-width: fit-content;
     }
 
     .items:active {
-        background-color: lightgray;
+        /* background-color: lightgray; */
+        opacity: 0.8;
     }
 
     table {
@@ -102,7 +57,7 @@
     }
 
     td:first-child {
-        background-color: #e4dbff;
+        background-color: var(--light-primary);
         border-top-left-radius: 10px;
         border-bottom-left-radius: 10px;
     }
@@ -110,7 +65,7 @@
     td:last-child {
         border-top-right-radius: 10px;
         border-bottom-right-radius: 10px;
-        background-color: #f0f0f0;
+        background-color: var(--light);
     }
 
     .logo-column {
@@ -125,59 +80,11 @@
         width: 100%;
         padding: 8px;
         padding-right: 15px;
-        color: black;
+        color: var(--dark);
         text-decoration: none;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-    }
-
-    .top-bar {
-        width: 100%;
-        height: auto;
-        color: white;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        background-color: #ffffff;
-    }
-
-    .topbar-mid-items {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .top-bar-image {
-        height: 40px;
-        width: 40px;
-        border-radius: 50%;
-    }
-
-    .top-bar-text {
-        font-size: 25px;
-        user-select: none;
-        font-weight: bold;
-        margin-left: 15px;
-        color: #26205e;
-        user-select: none;
-        font-weight: bold;
-    }
-
-    .home-button {
-        height: 40px;
-        width: 40px;
-        border-radius: 50%;
-        margin-left: 5px;
-    }
-
-    .home-button:hover {
-        cursor: pointer;
-    }
-
-    .home-button:active {
-        background-color: lightgray;
-        transform: scale(0.95);
     }
 </style>
 
@@ -200,25 +107,9 @@
              </svg>
         </a>
    </nav>
-    <!-- <div class="top-bar">
-
-        <img src="/web/images/home.svg" class="home-button" onclick="topHome()">
 
 
-        <div class="topbar-mid-items">
-            <img src="/web/images/icon.jpeg" alt="Your Image" class="top-bar-image">
-            <p class="top-bar-text"> Directory </p>
-        </div>
-
-        <div class="switch-div">
-            <label class="switch">
-                <input type="checkbox" id="switch" name="switch" value="false" onchange="switchh()">
-                <span class="slider round"></span>
-            </label>
-        </div>
-
-    </div> -->
-
+<main>
     <div class="directory-div">
         <h4 class="current-dir">{{.CurrentDir}}</h2>
     </div>
@@ -256,76 +147,12 @@
         </tr>
         {{end}}
     </table>
+</main>
 </body>
 
 </html>
 <script src="/web/js/sciprt.js"></script>
 
-<!-- <style>
-    .switch-div {
-        margin-left: 20px;
-    }
-
-    .switch {
-        position: relative;
-        display: inline-block;
-        width: 60px;
-        height: 34px;
-    }
-
-    .switch input {
-        opacity: 0;
-        width: 0;
-        height: 0;
-    }
-
-    .slider {
-        position: absolute;
-        cursor: pointer;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: #ccc;
-        -webkit-transition: .4s;
-        transition: .4s;
-    }
-
-    .slider:before {
-        position: absolute;
-        content: "";
-        height: 26px;
-        width: 26px;
-        left: 4px;
-        bottom: 4px;
-        background-color: white;
-        -webkit-transition: .4s;
-        transition: .4s;
-    }
-
-    input:checked+.slider {
-        background-color: #26205e;
-    }
-
-    input:focus+.slider {
-        box-shadow: 0 0 1px #26205e;
-    }
-
-    input:checked+.slider:before {
-        -webkit-transform: translateX(26px);
-        -ms-transform: translateX(26px);
-        transform: translateX(26px);
-    }
-
-    /* Rounded sliders */
-    .slider.round {
-        border-radius: 34px;
-    }
-
-    .slider.round:before {
-        border-radius: 50%;
-    }
-</style> -->
 
 <!-- <script>
 
