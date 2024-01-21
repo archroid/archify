@@ -222,12 +222,19 @@ main .upload-container .files-list-container {
      border-radius: 20px;
      background: var(--light);
      padding: 20px;
+     overflow-x: auto;
+     -ms-overflow-style: none;
+     scrollbar-width: none;
+}
 
+main .upload-container .browse-container::-webkit-scrollbar,
+main .upload-container .files-list-container::-webkit-scrollbar {
+     display: none;
 }
 
 
 main .upload-container .browse-container {
-     /* flex-grow: 1; */
+     flex-grow: 1;
      /* flex-basis: 500px; */
      display: flex;
      align-items: center;
@@ -262,9 +269,9 @@ main .upload-container .browse-container h3 {
      color: var(--dark);
 }
 
-/* main .upload-container .files-list-container {
+main .upload-container .files-list-container {
      flex-grow: 5;
-} */
+}
 
 main .upload-container .files-list-container .header {
      display: flex;
