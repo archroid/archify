@@ -10,11 +10,50 @@
 </head>
 
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Open+Sans');
+    @font-face {
+        font-display: swap;
+        /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+        font-family: 'Poppins';
+        font-style: normal;
+        font-weight: 400;
+        src: url('/static/fonts/poppins-v20-latin-regular.woff2') format('woff2');
+        /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+    }
 
+    @font-face {
+        font-display: swap;
+        /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+        font-family: 'Poppins';
+        font-style: normal;
+        font-weight: 500;
+        src: url('/static/fonts/poppins-v20-latin-500.woff2') format('woff2');
+        /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+    }
+
+    @font-face {
+        font-display: swap;
+        /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+        font-family: 'Poppins';
+        font-style: normal;
+        font-weight: 600;
+        src: url('/static/fonts/poppins-v20-latin-600.woff2') format('woff2');
+        /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+    }
+
+    @font-face {
+        font-display: swap;
+        /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+        font-family: 'Poppins';
+        font-style: normal;
+        font-weight: 700;
+        src: url('/static/fonts/poppins-v20-latin-700.woff2') format('woff2');
+        /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+    }
+*{
+    font-family: 'Poppins', sans-serif;
+}
     body {
         font-size: 16px;
-        font-family: 'Open Sans';
         padding-right: 20px;
     }
 
@@ -22,7 +61,6 @@
     .current-dir {
         padding: 10px;
         font-size: 17px;
-        font-family: 'Open Sans';
         font-weight: 500;
         color: #26205e;
 
@@ -55,7 +93,6 @@
     td {
         border: 0;
         font-size: 17px;
-        font-family: 'Open Sans';
         word-wrap: break-word;
 
     }
@@ -115,12 +152,10 @@
 
     .top-bar-text {
         font-size: 25px;
-        font-family: 'Open Sans';
         user-select: none;
         font-weight: bold;
         margin-left: 15px;
         color: #26205e;
-        font-family: 'Open Sans';
         user-select: none;
         font-weight: bold;
     }
