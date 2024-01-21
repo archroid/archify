@@ -4,22 +4,21 @@ var metaThemeColor = document.querySelector("meta[name=theme-color]");
 function changeThemeColor(isDark) {
      if (isDark) {
           metaThemeColor.setAttribute("content", "#181a1e");
-
      } else {
           metaThemeColor.setAttribute("content", "#eeeeee");
      }
 }
 
 
-if (localStorage.getItem('isDarkMode') === "true") {
-     toggler.checked = true;
-     document.body.classList.add('dark');
-     changeThemeColor(true);
-
-} else {
+if (localStorage.getItem('isDarkMode') === "false") {
      toggler.checked = false;
      document.body.classList.remove('dark');
      changeThemeColor(false);
+
+} else {
+     toggler.checked = true;
+     document.body.classList.add('dark');
+     changeThemeColor(true);
 
 }
 
