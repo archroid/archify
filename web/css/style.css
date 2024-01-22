@@ -375,7 +375,7 @@ main .upload-container .files-list-container .upload-btn:active {
 }
 
 
-footer{
+footer {
      width: 100%;
      height: 56px;
      display: flex;
@@ -384,13 +384,19 @@ footer{
      background-color: var(--light);
 }
 
-footer p{
+footer p {
      color: var(--dark);
      font-size: 0.9rem;
 }
-footer p a{
+
+footer p .bx {
+     font-size: 0.9rem;
+
+}
+
+footer p a {
      color: var(--primary);
      text-decoration: none;
      font-weight: 600;
-     
+
 }
