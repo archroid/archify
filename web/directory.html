@@ -166,10 +166,53 @@
     <main>
         <div class="directory-div">
             <h4 class="current-dir">{{.CurrentDir}}</h2>
-                <!-- <input type="checkbox" id="theme-toggle" hidden>
-            <label for="theme-toggle" class="theme-toggle"></label> -->
+                <div class="hidden-files-div">
+                    <p>Hidden Files</p>
+                    <input type="checkbox" id="files-toggle" onchange="switchh()" hidden>
+                    <label for="files-toggle" class="files-toggle" ></label>
+                </div>
         </div>
 
+        <style>
+            .hidden-files-div{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            main div p{
+                color: var(--dark);
+                margin-right: 5px;
+            }
+            .files-toggle {
+                display: block;
+                min-width: 50px;
+                height: 25px;
+                background: var(--grey);
+                cursor: pointer;
+                position: relative;
+                border-radius: 25px;
+                margin-right: 20px;
+            }
+
+            .files-toggle::before {
+                display: flex;
+                content: "";
+                background-color: var(--primary);
+                align-items: center;
+                justify-content: center;
+                position: absolute;
+                top: 2px;
+                left: 2px;
+                bottom: 2px;
+                width: calc(25px - 4px);
+                border-radius: 50%;
+                transition: all 0.3s ease;
+            }
+
+            #files-toggle:checked+.files-toggle::before {
+                left: calc(100% - (25px - 4px) - 2px);
+            }
+        </style>
 
         <div class="main-div">
             <table>
@@ -223,25 +266,21 @@
 <script src="/web/js/sciprt.js"></script>
 
 
-<!-- <script>
+<script>
 
     window.onload = function () {
         var switchStatus = localStorage.getItem('hiddenFilesStatus');
         if (switchStatus) {
-            document.getElementById("switch").checked = switchStatus === "true";
+            document.getElementById("files-toggle").checked = switchStatus === "true";
         }
     }
 
     function switchh() {
-        var switchValue = document.getElementById("switch").checked ? "true" : "false";
+        var switchValue = document.getElementById("files-toggle").checked ? "true" : "false";
         localStorage.setItem('hiddenFilesStatus', switchValue);
 
         window.location.href = window.location.origin + "/hiddinfiles/" + switchValue;
     }
 
-    function topHome() {
-        window.location.href = window.location.origin;
-    }
 
-
-</script> -->
+</script>
