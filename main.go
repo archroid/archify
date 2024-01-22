@@ -194,7 +194,7 @@ func handleDirectory(w http.ResponseWriter, r *http.Request) {
 			filesData = append(filesData, File{
 				IsDir:         file.IsDir(),
 				Name:          file.Name(),
-				FileURL:       "http://" + localip + ":8080/d" + directory + file.Name() + "/",
+				FileURL:       "http://" + localip + ":8080/d/" + directory + file.Name() + "/",
 				FileURLFolder: "http://" + localip + ":8080/dir/" + directory + file.Name() + "/",
 			})
 
