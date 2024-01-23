@@ -1,6 +1,8 @@
 const toggler = document.getElementById('theme-toggle');
 var metaThemeColor = document.querySelector("meta[name=theme-color]");
 
+
+
 function changeThemeColor(isDark) {
      if (isDark) {
           metaThemeColor.setAttribute("content", "#181a1e");
@@ -58,32 +60,80 @@ function accessServer() {
 }
 
 function reboot() {
+     butterup.toast({
+          title: 'Rebooting!',
+          location: 'top-center',
+          icon: true,
+          dismissable: true,
+          type: 'success',
+          // theme: 'glass',
+     });
+
      fetch(window.location.href + "/reboot")
           .then(response => response.json())
-          .then(data =>
-               alert(`${JSON.stringify(data.resp)}`)
-          )
+          .then(data => console.log(data))
           .catch((error) => {
                console.error('Error:', error);
+               butterup.toast({
+                    title: 'Error rebooting!',
+                    location: 'top-center',
+                    icon: true,
+                    dismissable: true,
+                    type: 'error',
+               });
           });
 
 }
 
 function shutdown() {
+
+     butterup.toast({
+          title: 'Shutting down!',
+          location: 'top-center',
+          icon: true,
+          dismissable: true,
+          type: 'success',
+          // theme: 'glass',
+     });
+
+
      fetch(window.location.href + "/shutdown")
           .then(response => response.json())
           .then(data => console.log(data))
           .catch((error) => {
-               console.error('Error:', error);
+               butterup.toast({
+                    title: 'Error shutting down!',
+                    location: 'top-center',
+                    icon: true,
+                    dismissable: true,
+                    type: 'error',
+               });
           });
 }
 
 function sleep() {
+
+     butterup.toast({
+          title: 'Sleeping!',
+          location: 'top-center',
+          icon: true,
+          dismissable: true,
+          type: 'success',
+          // theme: 'glass',
+     });
+
      fetch(window.location.href + "/sleep")
           .then(response => response.json())
           .then(data => console.log(data))
           .catch((error) => {
                console.error('Error:', error);
+               butterup.toast({
+                    title: 'Error sleeping!',
+                    location: 'top-center',
+                    icon: true,
+                    dismissable: true,
+                    type: 'error',
+               });
           });
 }
 
@@ -97,6 +147,17 @@ function upload() {
      var totalSize = 0;
      for (let i = 0; i < fileInput.files.length; i++) {
           totalSize += fileInput.files[i].size;
+     }
+
+     if (totalSize == 0){
+          butterup.toast({
+               title: 'No files selected!',
+               location: 'top-center',
+               icon: true,
+               dismissable: true,
+               type: 'error',
+               // theme: 'glass',
+          });
      }
 
      // Keep track of total uploaded size
@@ -122,7 +183,7 @@ function upload() {
           // Load end
           xhr.onloadend = function () {
                if (xhr.status == 200) {
-                    console.log("upload complete");
+                    console.log("upload complete");  
                } else {
                     console.log("upload failed");
                }
