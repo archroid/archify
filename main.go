@@ -74,6 +74,8 @@ func main() {
 
 	r.HandleFunc("/log", handleLog)
 
+	r.HandleFunc("/kill", handleKill)
+
 	r.HandleFunc("/ping", handlePing)
 
 	r.HandleFunc("/dir/{dir:.*}", handleDirectory)
@@ -124,6 +126,10 @@ func main() {
 
 func handleLog(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w, r, "./archify.log")
+}
+
+func handleKill(w http.ResponseWriter, r *http.Request) {
+	os.Exit(0)
 }
 
 func handlePing(w http.ResponseWriter, r *http.Request) {
