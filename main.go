@@ -3,7 +3,6 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"io"
 	"net"
 	"net/http"
@@ -32,10 +31,18 @@ func main() {
 	myFigure := figure.NewColorFigure("ARCHIFY", "", "blue", true)
 	myFigure.Print()
 
-	fmt.Println("")
+	// save logs into a file
+	os.Remove("archify.log")
+	f, err := os.OpenFile("archify.log", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+	if err != nil {
+		log.Fatalf("error opening file: %v", err)
+	}
+	defer f.Close()
+
+	log.SetOutput(f)
 
 	// Load the .env file
-	err := godotenv.Load()
+	err = godotenv.Load()
 	if err != nil {
 		log.Error("Error loading .env file")
 	}
@@ -60,6 +67,8 @@ func main() {
 	r.PathPrefix("/web").Handler(http.StripPrefix("/web", http.FileServer(http.Dir("./web"))))
 
 	r.PathPrefix("/d/").Handler(http.StripPrefix("/d/", http.FileServer(http.Dir(homePath))))
+
+	r.HandleFunc("/log", handleLog)
 
 	r.HandleFunc("/ping", handlePing)
 
@@ -108,6 +117,10 @@ func main() {
 }
 
 // HTTP hanlders
+
+func handleLog(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w, r, "./archify.log")
+}
 
 func handlePing(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(map[string]string{"resp": "pong"})
