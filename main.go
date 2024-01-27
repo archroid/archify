@@ -3,6 +3,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"io"
 	"net"
 	"net/http"
@@ -31,6 +32,9 @@ func main() {
 	myFigure := figure.NewColorFigure("ARCHIFY", "", "blue", true)
 	myFigure.Print()
 
+	//next line
+	fmt.Println("")
+
 	// save logs into a file
 	os.Remove("archify.log")
 	f, err := os.OpenFile("archify.log", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
@@ -39,7 +43,7 @@ func main() {
 	}
 	defer f.Close()
 
-	log.SetOutput(f)
+	log.SetOutput(io.MultiWriter(f, os.Stdout))
 
 	// Load the .env file
 	err = godotenv.Load()
