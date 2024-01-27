@@ -36,17 +36,17 @@ func main() {
 	fmt.Println("")
 
 	// save logs into a file
-	os.Remove("archify.log")
-	f, err := os.OpenFile("archify.log", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
-	if err != nil {
-		log.Fatalf("error opening file: %v", err)
-	}
-	defer f.Close()
+	// os.Remove("archify.log")
+	// f, err := os.OpenFile("archify.log", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+	// if err != nil {
+	// 	log.Fatalf("error opening file: %v", err)
+	// }
+	// defer f.Close()
 
-	log.SetOutput(io.MultiWriter(f, os.Stdout))
+	// log.SetOutput(io.MultiWriter(f, os.Stdout))
 
 	// Load the .env file
-	err = godotenv.Load()
+	err := godotenv.Load()
 	if err != nil {
 		log.Error("Error loading .env file")
 	}
