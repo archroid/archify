@@ -2,8 +2,6 @@ package discordbot
 
 import (
 	"os"
-	"os/signal"
-	"syscall"
 
 	utils "archroid/archify/utils"
 
@@ -70,9 +68,9 @@ func RunSession() error {
 	log.Info("Discord bot is now running")
 
 	// Cleanly close down the Discord session.
-	sc := make(chan os.Signal, 1)
-	signal.Notify(sc, syscall.SIGINT, syscall.SIGTERM, os.Interrupt)
-	<-sc
+	// sc := make(chan os.Signal, 1)
+	// signal.Notify(sc, syscall.SIGINT, syscall.SIGTERM, os.Interrupt)
+	// <-sc
 
 	// for _, v := range registeredCommands {
 	// 	log.Info("Deleting command: ", v.Name)

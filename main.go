@@ -92,12 +92,14 @@ func main() {
 		}
 	}()
 
-	log.Info("Press CTRL-C to exit")
+	go func() {
+		err = discordbot.RunSession()
+		if err != nil {
+			log.Error("Discord bot failed to start:  ", err)
+		}
+	}()
 
-	err = discordbot.RunSession()
-	if err != nil {
-		log.Error("Discord bot failed to start:  ", err)
-	}
+	log.Info("Press CTRL-C to exit")
 
 	sc := make(chan os.Signal, 1)
 	signal.Notify(sc, syscall.SIGINT, syscall.SIGTERM, os.Interrupt)
