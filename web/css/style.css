@@ -81,7 +81,6 @@ body.dark {
      --light-pink: #2a1a2a;
 
      -webkit-tap-highlight-color: #ffffff16;
-     font-family: 'Poppins', sans-serif;
 
 }
 
@@ -89,6 +88,7 @@ body.dark {
      margin: 0;
      padding: 0;
      box-sizing: border-box;
+     font-family: 'Poppins', sans-serif;
 }
 
 
