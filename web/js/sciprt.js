@@ -148,7 +148,7 @@ function upload() {
           totalSize += fileInput.files[i].size;
      }
 
-     if (totalSize == 0){
+     if (totalSize == 0) {
           butterup.toast({
                title: 'No files selected!',
                location: 'top-center',
@@ -182,7 +182,7 @@ function upload() {
           // Load end
           xhr.onloadend = function () {
                if (xhr.status == 200) {
-                    console.log("upload complete");  
+                    console.log("upload complete");
                } else {
                     console.log("upload failed");
                }
@@ -260,4 +260,12 @@ function itemselect(target) {
           nameCell.textContent = fileNames[i];
      }
 
+}
+
+function kill() {
+     window.location.href = window.location.href + "/kill"
+}
+
+function log() {
+     window.location.href = window.location.href + "/log"
 }

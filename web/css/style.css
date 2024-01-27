@@ -65,6 +65,7 @@ body {
      overflow-x: hidden;
      transition: all 0.3s ease;
      -webkit-tap-highlight-color: #00000016;
+     
 
 }
 
@@ -80,6 +81,7 @@ body.dark {
      --light-pink: #2a1a2a;
 
      -webkit-tap-highlight-color: #ffffff16;
+     font-family: 'Poppins', sans-serif;
 
 }
 
@@ -87,7 +89,6 @@ body.dark {
      margin: 0;
      padding: 0;
      box-sizing: border-box;
-     font-family: 'Poppins', sans-serif;
 }
 
 
@@ -243,8 +244,8 @@ main ul li:nth-child(1) .bx {
 }
 
 main ul li:nth-child(2) .bx {
-     background: var(--light-warning);
-     color: var(--warning);
+     background: var(--light-danger);
+     color: var(--danger);
 }
 
 main ul li:nth-child(3) .bx {
@@ -253,8 +254,9 @@ main ul li:nth-child(3) .bx {
 }
 
 main ul li:nth-child(4) .bx {
-     background: var(--light-danger);
-     color: var(--danger);
+     background: var(--light-warning);
+     color: var(--warning);
+
 }
 
 

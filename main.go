@@ -125,7 +125,40 @@ func main() {
 // HTTP hanlders
 
 func handleLog(w http.ResponseWriter, r *http.Request) {
-	http.ServeFile(w, r, "./archify.log")
+	// Read the file
+	content, err := os.ReadFile("./archify.log")
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	// Create an HTML template with the meta tag
+	templatee := `
+	<!DOCTYPE html>
+	<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="color-scheme" content="light dark">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="icon" href="web/images/icon.svg">
+		<title>Log</title>
+	</head>
+	    <pre style>{{.}}</pre>
+	</html>
+	`
+
+	// Parse the template and execute it with the log content
+	t, err := template.New("log").Parse(templatee)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	err = t.Execute(w, string(content))
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
 }
 
 func handleKill(w http.ResponseWriter, r *http.Request) {
