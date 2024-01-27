@@ -73,14 +73,14 @@ function reboot() {
           .then(response => response.json())
           .then(data => console.log(data))
           .catch((error) => {
-               console.error('Error:', error);
-               butterup.toast({
-                    title: 'Error rebooting!',
-                    location: 'top-center',
-                    icon: true,
-                    dismissable: true,
-                    type: 'error',
-               });
+               // console.error('Error:', error);
+               // butterup.toast({
+               //      title: 'Error rebooting!',
+               //      location: 'top-center',
+               //      icon: true,
+               //      dismissable: true,
+               //      type: 'error',
+               // });
           });
 
 }
@@ -101,13 +101,13 @@ function shutdown() {
           .then(response => response.json())
           .then(data => console.log(data))
           .catch((error) => {
-               butterup.toast({
-                    title: 'Error shutting down!',
-                    location: 'top-center',
-                    icon: true,
-                    dismissable: true,
-                    type: 'error',
-               });
+               // butterup.toast({
+               //      title: 'Error shutting down!',
+               //      location: 'top-center',
+               //      icon: true,
+               //      dismissable: true,
+               //      type: 'error',
+               // });
           });
 }
 
@@ -126,14 +126,13 @@ function sleep() {
           .then(response => response.json())
           .then(data => console.log(data))
           .catch((error) => {
-               console.error('Error:', error);
-               butterup.toast({
-                    title: 'Error sleeping!',
-                    location: 'top-center',
-                    icon: true,
-                    dismissable: true,
-                    type: 'error',
-               });
+               // butterup.toast({
+               //      title: 'Error sleeping!',
+               //      location: 'top-center',
+               //      icon: true,
+               //      dismissable: true,
+               //      type: 'error',
+               // });
           });
 }
 
